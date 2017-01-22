@@ -1,0 +1,68 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myDesenpenoLabel" data-translate="escuelitaParajelesFloroApp.desenpeno.home.createOrEditLabel">Create or edit a Desenpeno</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.desenpeno.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.desenpeno.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="escuelitaParajelesFloroApp.desenpeno.calificacion" for="field_calificacion">Calificacion</label>
+            <input type="number" class="form-control" name="calificacion" id="field_calificacion"
+                    ng-model="vm.desenpeno.calificacion"
+                    required min="0" max="100" />
+            <div ng-show="editForm.calificacion.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.calificacion.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.calificacion.$error.min" data-translate="entity.validation.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.calificacion.$error.max" data-translate="entity.validation.max" translate-value-max="100">
+                    This field cannot be more than 100.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.calificacion.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="escuelitaParajelesFloroApp.desenpeno.notas" for="field_notas">Notas</label>
+            <input type="text" class="form-control" name="notas" id="field_notas"
+                    ng-model="vm.desenpeno.notas"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="escuelitaParajelesFloroApp.desenpeno.jugador" for="field_jugador">Jugador</label>
+            <select class="form-control" id="field_jugador" name="jugador" ng-model="vm.desenpeno.jugadorId" ng-options="jugador.id as jugador.cedula for jugador in vm.jugadors"            >
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="escuelitaParajelesFloroApp.desenpeno.entrenamiento" for="field_entrenamiento">Entrenamiento</label>
+            <select class="form-control" id="field_entrenamiento" name="entrenamiento" ng-model="vm.desenpeno.entrenamientoId" ng-options="entrenamiento.id as entrenamiento.descripcion for entrenamiento in vm.entrenamientos"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

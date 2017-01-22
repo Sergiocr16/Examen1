@@ -1,0 +1,25 @@
+{
+    "escuelitaParajelesFloroApp": {
+        "desenpeno" : {
+            "home": {
+                "title": "Desenpenos",
+                "createLabel": "Crear nuevo Desenpeno",
+                "createOrEditLabel": "Crear o editar Desenpeno",
+                "search": "Search for Desenpeno"
+            },
+            "created": "Un nuevo Desenpeno ha sido creado con el identificador {{ param }}",
+            "updated": "Un Desenpeno ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Desenpeno ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Desenpeno {{ id }}?"
+            },
+            "detail": {
+                "title": "Desenpeno"
+            },
+            "calificacion": "Calificacion",
+            "notas": "Notas",
+            "jugador": "Jugador",
+            "entrenamiento": "Entrenamiento"
+        }
+    }
+}

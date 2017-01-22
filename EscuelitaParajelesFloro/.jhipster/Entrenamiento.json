@@ -1,0 +1,46 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "desenpeno",
+            "otherEntityName": "desenpeno",
+            "otherEntityRelationshipName": "entrenamiento"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "javadoc": "Relacion con el usuario built-in\nque seria el entrenador (Verificar que sirva)",
+            "relationshipName": "entrenador",
+            "otherEntityName": "user",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "horario",
+            "otherEntityName": "horario",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "descripcion",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fechaHora",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170122040806",
+    "entityTableName": "entrenamiento",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "angularJSSuffix": "ang"
+}
