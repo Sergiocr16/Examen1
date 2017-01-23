@@ -5,9 +5,9 @@
         .module('escuelitaParajelesFloroApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance'];
+    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', 'Horario', 'AlertService'];
 
-    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance) {
+    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance, Horario, AlertService) {
         var vm = this;
 
         vm.authenticationError = false;
@@ -55,6 +55,26 @@
                     Auth.resetPreviousState();
                     $state.go(previousState.name, previousState.params);
                 }
+                Horario.mostRecent( r => {
+                    //cambiar lugar
+                    let map_min = m => {
+                        let horas   = Math.floor(m / 60);
+                        let minutos =  m % 60;
+                        let addZero = m => (m < 10 ? "0" : "").concat(m);
+                        return addZero(horas) + ":" + addZero(minutos);
+                    };
+                    AlertService.info(
+                        "Hola, su entrenamiento mas cercano es el "
+                        + r.horario.dia.toLowerCase()
+                        +" de "
+                        + map_min(r.horario.horaInicio)
+                        + " a "
+                        + map_min(r.horario.horaFin)
+                        + " con "
+                        + r.cantidadJugadores
+                        +" jugadores");
+                });
+
             }).catch(function () {
                 vm.authenticationError = true;
             });

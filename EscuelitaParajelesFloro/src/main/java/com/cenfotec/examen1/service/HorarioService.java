@@ -10,11 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
-
 import javax.inject.Inject;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing Horario.
@@ -24,7 +20,7 @@ import java.util.stream.Collectors;
 public class HorarioService {
 
     private final Logger log = LoggerFactory.getLogger(HorarioService.class);
-    
+
     @Inject
     private HorarioRepository horarioRepository;
 
@@ -47,11 +43,11 @@ public class HorarioService {
 
     /**
      *  Get all the horarios.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<HorarioDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Horarios");
         Page<Horario> result = horarioRepository.findAll(pageable);
@@ -64,7 +60,7 @@ public class HorarioService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public HorarioDTO findOne(Long id) {
         log.debug("Request to get Horario : {}", id);
         Horario horario = horarioRepository.findOne(id);
