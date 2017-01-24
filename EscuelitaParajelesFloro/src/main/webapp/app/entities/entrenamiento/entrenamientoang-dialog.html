@@ -54,9 +54,15 @@
         </div>
         <div class="form-group">
             <label data-translate="escuelitaParajelesFloroApp.entrenamiento.horario" for="field_horario">Horario</label>
-            <select class="form-control" id="field_horario" name="horario" ng-model="vm.entrenamiento.horarioId" ng-options="horario.id as horario.id for horario in vm.horarios"            >
+            <select required class="form-control" id="field_horario" name="horario" ng-model="vm.entrenamiento.horarioId" ng-options="horario.id as vm.formatHorario(horario) for horario in vm.horarios"            >
                 <option value=""></option>
             </select>
+            <div ng-show="editForm.horario.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.horario.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
         </div>
     </div>
     <div class="modal-footer">

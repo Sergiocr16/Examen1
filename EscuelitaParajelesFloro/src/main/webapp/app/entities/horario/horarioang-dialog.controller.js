@@ -13,6 +13,16 @@
         vm.horario = entity;
         vm.clear = clear;
         vm.save = save;
+
+        vm.showTime = (h, m) => {
+            let addZero = x => ( x < 10 ? "0" : "")
+                               .concat(x);
+            if(isNaN(h) || isNaN(m)){
+                return '';
+            }
+            return addZero(h) + ":" + addZero(m);
+        }
+
         vm.entrenamientos = Entrenamiento.query();
         vm.categorias = Categoria.query();
 
@@ -26,6 +36,8 @@
 
         function save () {
             vm.isSaving = true;
+            vm.horario.horaInicio = vm.IniH * 60 + vm.IniM;;
+            vm.horario.horaFin = vm.FinH * 60 + vm.FinM;
             if (vm.horario.id !== null) {
                 Horario.update(vm.horario, onSaveSuccess, onSaveError);
             } else {

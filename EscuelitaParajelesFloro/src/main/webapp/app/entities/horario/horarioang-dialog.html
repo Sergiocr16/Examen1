@@ -15,52 +15,105 @@
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="escuelitaParajelesFloroApp.horario.horaInicio" for="field_horaInicio">Hora Inicio</label>
-            <input type="number" class="form-control" name="horaInicio" id="field_horaInicio"
-                    ng-model="vm.horario.horaInicio"
-                    required min="0" max="1439" />
-            <div ng-show="editForm.horaInicio.$invalid">
+            <label class="control-label" >{{vm.showTime(vm.IniH, vm.IniM)}}</label>
+            <input type="number" class="form-control" name="horaInicioH" id="field_horaInicio"
+                   ng-model="vm.IniH"
+                   required min="0" max="23" placeholder="Horas"/>
+            <div ng-show="editForm.horaInicioH.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.horaInicio.$error.required" data-translate="entity.validation.required">
+                   ng-show="editForm.horaInicioH.$error.required" data-translate="entity.validation.required">
                     This field is required.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.horaInicio.$error.min" data-translate="entity.validation.min" translate-value-min="0">
+                   ng-show="editForm.horaInicioH.$error.min" data-translate="entity.validation.min" translate-value-min="0">
                     This field should be more than 0.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.horaInicio.$error.max" data-translate="entity.validation.max" translate-value-max="1439">
-                    This field cannot be more than 1439.
+                   ng-show="editForm.horaInicioH.$error.max" data-translate="entity.validation.max" translate-value-max="23">
+                    This field cannot be more than 23.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.horaInicio.$error.number" data-translate="entity.validation.number">
+                   ng-show="editForm.horaInicioH.$error.number" data-translate="entity.validation.number">
                     This field should be a number.
                 </p>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="number" class="form-control" name="horaInicioM" id="field_horaInicio2"
+                   ng-model="vm.IniM"
+                   required min="0" max="59" placeholder="Minutos"/>
+
+            <div ng-show="editForm.horaInicioM.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.horaInicioM.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.horaInicioM.$error.min" data-translate="entity.validation.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.horaInicioM.$error.max" data-translate="entity.validation.max" translate-value-max="59">
+                    This field cannot be more than 59.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.horaInicioM.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+
             </div>
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="escuelitaParajelesFloroApp.horario.horaFin" for="field_horaFin">Hora Fin</label>
-            <input type="number" class="form-control" name="horaFin" id="field_horaFin"
-                    ng-model="vm.horario.horaFin"
-                    required min="0" max="1439" />
-            <div ng-show="editForm.horaFin.$invalid">
+            <label class="control-label" >{{vm.showTime(vm.FinH, vm.FinM)}}</label>
+            <input type="number" class="form-control" name="horaFinH" id="field_horaFin"
+                    ng-model="vm.FinH"
+                    required min="0" max="23" placeholder="Horas"/>
+            <div ng-show="editForm.horaFinH.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.horaFin.$error.required" data-translate="entity.validation.required">
+                    ng-show="editForm.horaFinH.$error.required" data-translate="entity.validation.required">
                     This field is required.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.horaFin.$error.min" data-translate="entity.validation.min" translate-value-min="0">
+                    ng-show="editForm.horaFinH.$error.min" data-translate="entity.validation.min" translate-value-min="0">
                     This field should be more than 0.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.horaFin.$error.max" data-translate="entity.validation.max" translate-value-max="1439">
-                    This field cannot be more than 1439.
+                    ng-show="editForm.horaFinH.$error.max" data-translate="entity.validation.max" translate-value-max="23">
+                    This field cannot be more than 23.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.horaFin.$error.number" data-translate="entity.validation.number">
+                    ng-show="editForm.horaFinH.$error.number" data-translate="entity.validation.number">
                     This field should be a number.
                 </p>
             </div>
         </div>
+
+        <div class="form-group">
+            <input type="number" class="form-control" name="horaFinM" id="field_horaFin2"
+                   ng-model="vm.FinM"
+                   required min="0" max="59" placeholder="Minutos"/>
+            <div ng-show="editForm.horaFinM.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.horaFinM.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.horaFinM.$error.min" data-translate="entity.validation.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.horaFinM.$error.max" data-translate="entity.validation.max" translate-value-max="59">
+                    This field cannot be more than 69.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.horaFinM.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+
         <div class="form-group">
             <label class="control-label" data-translate="escuelitaParajelesFloroApp.horario.dia" for="field_dia">Dia</label>
             <select class="form-control" name="dia" ng-model="vm.horario.dia" id="field_dia" required>

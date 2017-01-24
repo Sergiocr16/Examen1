@@ -5,9 +5,9 @@
         .module('escuelitaParajelesFloroApp')
         .controller('EntrenamientoAngDialogController', EntrenamientoAngDialogController);
 
-    EntrenamientoAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Entrenamiento', 'Desenpeno', 'User', 'Horario'];
+    EntrenamientoAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Entrenamiento', 'Desenpeno', 'User', 'Horario', 'minToTimeFilter'];
 
-    function EntrenamientoAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Entrenamiento, Desenpeno, User, Horario) {
+    function EntrenamientoAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Entrenamiento, Desenpeno, User, Horario, minToTimeFilter) {
         var vm = this;
 
         vm.entrenamiento = entity;
@@ -18,10 +18,21 @@
         vm.desenpenos = Desenpeno.query();
         vm.users = User.query();
         vm.horarios = Horario.query();
+        vm.formatHorario = formatHorario;
+
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
+
+        function formatHorario(h) {
+            return 'El '
+                + h.dia.toLowerCase();
+                +' de '
+                + minToTimeFilter(h.horaInicio)
+                +' a '
+                + minToTimeFilter(h.horaFin);
+        };
 
         function clear () {
             $uibModalInstance.dismiss('cancel');
