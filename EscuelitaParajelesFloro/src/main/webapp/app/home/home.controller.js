@@ -29,12 +29,13 @@
         function register () {
             $state.go('register');
         }
-        $scope.$on('authenticationSuccess', () =>
+        $scope.$on('authenticationSuccess', function() {
             $q.all([Horario.mostRecent().$promise, Principal.identity()])
-                .then(alertMosRecentHorario));
+                .then(alertMosRecentHorario)
+        });
 
         function alertMosRecentHorario(result){
-            let [r, u] = result;
+            let r = result[0], u = result[1];
             AlertService.info(
                 "Hola "
                 + u.firstName

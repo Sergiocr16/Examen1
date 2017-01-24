@@ -5,16 +5,18 @@
 (function () {
     'use strict';
     angular.module('escuelitaParajelesFloroApp')
-        .filter('minToTime', () => {
-            return (m) => {
-                let horas = Math.floor(m / 60);
-                let minutos = m % 60;
-                let addZero = m => (m < 10 ? "0" : "").concat(m);
-                return addZero(horas) + ":" + addZero(minutos);
+        .filter('minToTime', function() {
+            return function (m) {
+                function addZero(m) {
+                    return (m < 10 ? "0" : "").concat(m);
+                }
+                return addZero(Math.floor(m / 60))
+                    + ":"
+                    + addZero(m % 60);
             };
         })
-        .filter('timeToMin', () => {
-            return (t) => {
+        .filter('timeToMin', function () {
+            return function(t) {
                 let v = t.split(':');
                 if (v.length < 2) {
                     throw "invalid format error";

@@ -27,7 +27,7 @@
 
         function formatHorario(h) {
             return 'El '
-                + h.dia.toLowerCase();
+                + h.dia.toLowerCase()
                 +' de '
                 + minToTimeFilter(h.horaInicio)
                 +' a '

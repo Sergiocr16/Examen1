@@ -13,22 +13,23 @@
         vm.horario = entity;
         vm.clear = clear;
         vm.save = save;
-
-        vm.showTime = (h, m) => {
-            let addZero = x => ( x < 10 ? "0" : "")
-                               .concat(x);
-            if(isNaN(h) || isNaN(m)){
-                return '';
-            }
-            return addZero(h) + ":" + addZero(m);
-        }
-
+        vm.showTime = showTime
         vm.entrenamientos = Entrenamiento.query();
         vm.categorias = Categoria.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
+
+        function showTime(h, m) {
+            function addZero(x) {
+                return( x < 10 ? "0" : "").concat(x);
+            }
+            if(isNaN(h) || isNaN(m)){
+                return '';
+            }
+            return addZero(h) + ":" + addZero(m);
+        }
 
         function clear () {
             $uibModalInstance.dismiss('cancel');
