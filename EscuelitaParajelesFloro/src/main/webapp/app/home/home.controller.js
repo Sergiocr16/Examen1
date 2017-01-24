@@ -5,9 +5,9 @@
         .module('escuelitaParajelesFloroApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state'];
+    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state', 'minToTimeFilter', 'Horario', 'AlertService', '$q'];
 
-    function HomeController ($scope, Principal, LoginService, $state) {
+    function HomeController ($scope, Principal, LoginService, $state, minToTimeFilter, Horario, AlertService, $q) {
         var vm = this;
 
         vm.account = null;
@@ -28,6 +28,25 @@
         }
         function register () {
             $state.go('register');
+        }
+        $scope.$on('authenticationSuccess', () =>
+            $q.all([Horario.mostRecent().$promise, Principal.identity()])
+                .then(alertMosRecentHorario));
+
+        function alertMosRecentHorario(result){
+            let [r, u] = result;
+            AlertService.info(
+                "Hola "
+                + u.firstName
+                + ", su entrenamiento mas cercano es el "
+                + r.horario.dia.toLowerCase()
+                +" de "
+                + minToTimeFilter(r.horario.horaInicio)
+                + " a "
+                + minToTimeFilter(r.horario.horaFin)
+                + " con "
+                + r.cantidadJugadores
+                +" jugadores");
         }
     }
 })();
