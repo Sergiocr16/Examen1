@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/jugadorang?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_USER', 'ROLE_COUCH'],
                 pageTitle: 'escuelitaParajelesFloroApp.jugador.home.title'
             },
             views: {
@@ -55,7 +55,7 @@
             parent: 'entity',
             url: '/jugadorang/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_USER', 'ROLE_COUCH'],
                 pageTitle: 'escuelitaParajelesFloroApp.jugador.detail.title'
             },
             views: {
@@ -87,7 +87,7 @@
             parent: 'jugadorang-detail',
             url: '/detail/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER', 'ROLE_COUCH']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -112,7 +112,7 @@
             parent: 'jugadorang',
             url: '/new',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER', 'ROLE_COUCH']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -144,7 +144,7 @@
             parent: 'jugadorang',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER', 'ROLE_COUCH']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -169,7 +169,7 @@
             parent: 'jugadorang',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER', 'ROLE_COUCH']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({

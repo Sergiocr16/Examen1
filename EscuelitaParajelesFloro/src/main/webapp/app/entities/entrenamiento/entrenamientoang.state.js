@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/entrenamientoang?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_USER', 'ROLE_COUCH'],
                 pageTitle: 'escuelitaParajelesFloroApp.entrenamiento.home.title'
             },
             views: {
@@ -87,7 +87,7 @@
             parent: 'entrenamientoang-detail',
             url: '/detail/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER', 'ROLE_COUCH']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -112,7 +112,7 @@
             parent: 'entrenamientoang',
             url: '/new',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER', 'ROLE_COUCH']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -141,7 +141,7 @@
             parent: 'entrenamientoang',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER', 'ROLE_COUCH']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -166,7 +166,7 @@
             parent: 'entrenamientoang',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER', 'ROLE_COUCH']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({

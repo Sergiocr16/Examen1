@@ -2,24 +2,24 @@
     "escuelitaParajelesFloroApp": {
         "desenpeno" : {
             "home": {
-                "title": "Desenpenos",
-                "createLabel": "Create a new Desenpeno",
-                "createOrEditLabel": "Create or edit a Desenpeno",
-                "search": "Search for Desenpeno"
+                "title": "Performance",
+                "createLabel": "Create a new Performance",
+                "createOrEditLabel": "Create or edit a Performance",
+                "search": "Search for Performance"
             },
-            "created": "A new Desenpeno is created with identifier {{ param }}",
-            "updated": "A Desenpeno is updated with identifier {{ param }}",
-            "deleted": "A Desenpeno is deleted with identifier {{ param }}",
+            "created": "A new Performance is created with identifier {{ param }}",
+            "updated": "A Performance is updated with identifier {{ param }}",
+            "deleted": "A Performance is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Desenpeno {{ id }}?"
+                "question": "Are you sure you want to delete Performance {{ id }}?"
             },
             "detail": {
-                "title": "Desenpeno"
+                "title": "Performance"
             },
-            "calificacion": "Calificacion",
-            "notas": "Notas",
-            "jugador": "Jugador",
-            "entrenamiento": "Entrenamiento"
+            "calificacion": "Rating",
+            "notas": "Comments",
+            "jugador": "Player",
+            "entrenamiento": "Training"
         }
     }
 }
