@@ -20,6 +20,11 @@
                     return data;
                 }
             },
+           'getByCategoria' : {
+                        method: 'GET',
+                        url: 'api/jugadors/categoria/:id'
+                        , isArray: true
+                    },
             'update': { method:'PUT' }
         });
     }
