@@ -14,5 +14,4 @@ public interface EntrenamientoRepository extends JpaRepository<Entrenamiento,Lon
 
     @Query("select entrenamiento from Entrenamiento entrenamiento where entrenamiento.entrenador.login = ?#{principal.username}")
     List<Entrenamiento> findByEntrenadorIsCurrentUser();
-
 }

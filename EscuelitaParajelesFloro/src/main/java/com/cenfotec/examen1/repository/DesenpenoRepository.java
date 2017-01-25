@@ -11,5 +11,5 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface DesenpenoRepository extends JpaRepository<Desenpeno,Long> {
-
+    Desenpeno findByEntrenamientoIdAndJugadorId(Long entrenamientoId, Long jugadorId);
 }

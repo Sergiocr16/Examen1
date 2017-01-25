@@ -10,11 +10,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 import javax.inject.Inject;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Service Implementation for managing Jugador.
@@ -56,6 +58,18 @@ public class JugadorService {
         log.debug("Request to get all Jugadors");
         Page<Jugador> result = jugadorRepository.findAll(pageable);
         return result.map(jugador -> jugadorMapper.jugadorToJugadorDTO(jugador));
+    }
+    /**
+     *  Get one jugador by categoriaId.
+     *
+     *  @param id the id of the categoria
+     *  @return the entity
+     */
+    @Transactional(readOnly = true)
+    public List<JugadorDTO> findByCategoriaId(Long id) {
+        log.debug("Request to get all Jugadors");
+        Stream<Jugador> result = jugadorRepository.findByCategoria_Id(id);
+        return result.map(jugador -> jugadorMapper.jugadorToJugadorDTO(jugador)).collect(Collectors.toList());
     }
 
     /**

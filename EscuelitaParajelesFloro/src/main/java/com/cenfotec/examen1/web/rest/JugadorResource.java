@@ -24,6 +24,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * REST controller for managing Jugador.
@@ -33,7 +34,7 @@ import java.util.stream.Collectors;
 public class JugadorResource {
 
     private final Logger log = LoggerFactory.getLogger(JugadorResource.class);
-        
+
     @Inject
     private JugadorService jugadorService;
 
@@ -95,7 +96,20 @@ public class JugadorResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/jugadors");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-
+    /**
+     * GET  /jugadors/categoria/:id : get all the jugadors by categoria.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of jugadors in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @GetMapping("/jugadors/categoria/{id}")
+    @Timed
+    public ResponseEntity<List<JugadorDTO>> getAllJugadorsByCategoria(@PathVariable Long id)
+        throws URISyntaxException {
+        log.debug("REST request to get a list of Jugadors by categoria");
+        List<JugadorDTO> players = jugadorService.findByCategoriaId(id);
+        return new ResponseEntity<>(players,HttpStatus.OK);
+    }
     /**
      * GET  /jugadors/:id : get the "id" jugador.
      *
