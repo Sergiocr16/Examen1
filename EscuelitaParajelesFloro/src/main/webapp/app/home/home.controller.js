@@ -31,14 +31,14 @@
         }
         $scope.$on('authenticationSuccess', function() {
             $q.all([Horario.mostRecent().$promise, Principal.identity()])
-                .then(alertMosRecentHorario)
+                .then(alertMostRecentHorario)
         });
 
-        function alertMosRecentHorario(result){
+        function alertMostRecentHorario(result){
             let r = result[0], u = result[1];
             AlertService.info(
                 "Hola "
-                + u.firstName
+                + (u.firstName || "")
                 + ", su entrenamiento mas cercano es el "
                 + r.horario.dia.toLowerCase()
                 +" de "

@@ -2,11 +2,15 @@ package com.cenfotec.examen1.repository;
 
 import com.cenfotec.examen1.domain.Horario;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
+
 
 import java.util.List;
 import java.util.Optional;
 import com.cenfotec.examen1.domain.enumeration.Dia;
+import org.springframework.data.repository.query.Param;
 
 /**
  * Spring Data JPA repository for the Horario entity.
@@ -28,4 +32,10 @@ public interface HorarioRepository extends JpaRepository<Horario,Long> {
         "from horario group by dia) as r " +
         "on r.dia = h.dia and r.min_hora =  h.hora_inicio", nativeQuery = true)
     List<Horario> findMinHorarios();
+
+
+    @Query("select u from Horario u " +
+        "where u.horaFin > :#{#hor.horaInicio} and u.horaInicio < :#{#hor.horaFin} and u.dia = :#{#hor.dia}")
+    List<Horario> findIntersectors(@Param("hor") Horario horario);
+
 }

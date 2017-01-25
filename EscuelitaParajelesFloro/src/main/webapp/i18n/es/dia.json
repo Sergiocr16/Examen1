@@ -2,13 +2,13 @@
     "escuelitaParajelesFloroApp": {
         "Dia" : {
             "null": "",
-            "LUNES": "LUNES",
-            "MARTES": "MARTES",
-            "MIERCOLES": "MIERCOLES",
-            "JUEVES": "JUEVES",
-            "VIERNES": "VIERNES",
-            "SABADO": "SABADO",
-            "DOMINGO": "DOMINGO"
+            "LUNES": "Lunes",
+            "MARTES": "Martes",
+            "MIERCOLES": "Miercoles",
+            "JUEVES": "Jueves",
+            "VIERNES": "Viernes",
+            "SABADO": "Sabado",
+            "DOMINGO": "Domingo"
         }
     }
 }

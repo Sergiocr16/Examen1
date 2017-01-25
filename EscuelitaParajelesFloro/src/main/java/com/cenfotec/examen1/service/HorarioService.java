@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import javax.inject.Inject;
-
+import java.util.Optional;
 /**
  * Service Implementation for managing Horario.
  */
@@ -76,5 +76,15 @@ public class HorarioService {
     public void delete(Long id) {
         log.debug("Request to delete Horario : {}", id);
         horarioRepository.delete(id);
+    }
+
+    public Optional<HorarioDTO> intersection(HorarioDTO h) {
+        log.debug("fuckkkkkkkkkkkkk {}", h.getId());
+        return horarioRepository
+            .findIntersectors(horarioMapper.horarioDTOToHorario(h))
+            .stream()
+            .filter(hor -> !hor.getId().equals(h.getId()))
+            .findAny()
+            .map(horarioMapper::horarioToHorarioDTO);
     }
 }
