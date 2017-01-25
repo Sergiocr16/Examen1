@@ -19,7 +19,12 @@
             },
             'save': { method:'POST' },
             'update': { method:'PUT' },
-            'delete':{ method:'DELETE'}
+            'delete':{ method:'DELETE'},
+            'byRole' : {
+                method: 'GET',
+                url: 'api/usersByRol/:role',
+                isArray: true
+            }
         });
 
         return service;

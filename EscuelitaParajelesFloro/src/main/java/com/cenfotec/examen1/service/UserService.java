@@ -190,6 +190,13 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
+    public List<User> getUserByRole(String role) {
+        List<User> user = userRepository.findAllByRole(role);
+        user.forEach(u -> u.getAuthorities().size());
+        return user;
+    }
+
+    @Transactional(readOnly = true)
     public User getUserWithAuthorities() {
         Optional<User> optionalUser = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
         User user = null;

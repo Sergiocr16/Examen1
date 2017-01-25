@@ -35,7 +35,7 @@
         });
 
         function alertMostRecentHorario(result){
-            let r = result[0], u = result[1];
+            var r = result[0], u = result[1];
             AlertService.info(
                 "Hola "
                 + (u.firstName || "")

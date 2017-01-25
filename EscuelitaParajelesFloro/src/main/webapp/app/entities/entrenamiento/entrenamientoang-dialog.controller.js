@@ -16,7 +16,9 @@
         vm.openCalendar = openCalendar;
         vm.save = save;
         vm.desenpenos = Desenpeno.query();
-        vm.users = User.query();
+        User.byRole({role: 'ROLE_COUCH'}, function(r) {
+            vm.users = r;
+        });
         vm.horarios = Horario.query();
         vm.formatHorario = formatHorario;
 

@@ -15,7 +15,9 @@
                 <div class="alert alert-warning" ng-switch-when="false" data-translate="global.messages.info.register" translate-compile>
                     You don't have an account yet? <a class="alert-link" ui-sref="register">Register a new account</a>
                 </div>
-                <jhi-alert></jhi-alert>
+                <div has-authority="ROLE_COUCH">
+                    <jhi-alert></jhi-alert>
+                </div>
             </div>
         </div>
     </div>

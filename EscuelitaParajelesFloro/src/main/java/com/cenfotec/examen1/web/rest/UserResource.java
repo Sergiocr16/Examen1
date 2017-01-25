@@ -1,6 +1,8 @@
 package com.cenfotec.examen1.web.rest;
 
 import com.cenfotec.examen1.config.Constants;
+import com.cenfotec.examen1.service.dto.UserDTO;
+import com.cenfotec.examen1.service.mapper.UserMapper;
 import com.codahale.metrics.annotation.Timed;
 import com.cenfotec.examen1.domain.User;
 import com.cenfotec.examen1.repository.UserRepository;
@@ -65,6 +67,7 @@ public class UserResource {
 
     @Inject
     private UserService userService;
+
 
     /**
      * POST  /users  : Creates a new user.
@@ -180,5 +183,17 @@ public class UserResource {
         log.debug("REST request to delete User: {}", login);
         userService.deleteUser(login);
         return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.deleted", login)).build();
+    }
+
+
+    @GetMapping("/usersByRol/{role}")
+    @Timed
+    public ResponseEntity<List<UserDTO>> getUserByRol(@PathVariable String role)
+        throws URISyntaxException {
+        List<User> list = userService.getUserByRole(role);
+        List<UserDTO> list2  = list.stream()
+            .map(UserDTO::new)
+            .collect(Collectors.toList());
+        return new ResponseEntity<>(list2, HttpStatus.OK);
     }
 }
