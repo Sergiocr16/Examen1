@@ -4,6 +4,12 @@
         "subtitle": "Esta es su página de inicio",
         "logged": {
             "message": "Está conectado como \"{{username}}\"."
+        },
+        "saludo": {
+            "saludoNombre" :"Hola{{firstName ? ' ' + firstName : ''}},",
+            "diaEntrenamiento" : "su proximo entrenamiento es el",
+            "rangoTiempo" : "de {{horaInicio}} a {{horaFin}}",
+            "cantidadJugadores" : "con {{cantidad}} jugadores."
         }
     }
 }

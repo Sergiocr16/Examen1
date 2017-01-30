@@ -4,6 +4,14 @@
         "subtitle": "This is your homepage",
         "logged": {
             "message": "You are logged in as user \"{{username}}\"."
+        },
+
+        "saludo": {
+            "saludoNombre" :"Hello{{firstName ? ' ' + firstName : ''}},",
+            "diaEntrenamiento" : "your next tranning is on",
+            "rangoTiempo" : "from {{horaInicio}} to {{horaFin}}",
+            "cantidadJugadores" : "with {{cantidad}} players."
         }
+
     }
 }

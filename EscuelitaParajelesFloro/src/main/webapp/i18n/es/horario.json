@@ -19,7 +19,9 @@
             "horaInicio": "Hora Inicio",
             "horaFin": "Hora Fin",
             "dia": "Dia",
-            "categoria": "Categoria"
+            "categoria": "Categoria",
+            "minutes" : "Minutos",
+            "hours" : "Horas"
         }
     }
 }

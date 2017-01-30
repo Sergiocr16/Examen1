@@ -5,47 +5,58 @@
         .module('escuelitaParajelesFloroApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state', 'minToTimeFilter', 'Horario', 'AlertService', '$q'];
+    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state', 'minToTimeFilter', 'Horario', 'AlertService', '$q', '$translate'];
 
-    function HomeController ($scope, Principal, LoginService, $state, minToTimeFilter, Horario, AlertService, $q) {
+    function HomeController ($scope, Principal, LoginService, $state, minToTimeFilter, Horario, AlertService, $q, $translate) {
         var vm = this;
 
         vm.account = null;
         vm.isAuthenticated = null;
+        vm.saludo = null;
+
         vm.login = LoginService.open;
         vm.register = register;
+        vm.showHorarioMasCercano = showHorarioMasCercano;
+
         $scope.$on('authenticationSuccess', function() {
-            $q.all([Horario.mostRecent().$promise, getAccount()])
-                .then(alertMostRecentHorario)
+            getHorarioMasCercano();
         });
 
-        getAccount();
+        getHorarioMasCercano();
 
         function getAccount() {
            return Principal.identity().then(function(account) {
                 vm.account = account;
                 vm.isAuthenticated = Principal.isAuthenticated;
-                return account.firstName;
+                return account;
             });
         }
         function register () {
             $state.go('register');
         }
 
-        function alertMostRecentHorario(result){
-            var r = result[0], firstName = result[1];
-            AlertService.info(
-                "Hola "
-                + (firstName || "")
-                + ", su entrenamiento mas cercano es el "
-                + r.horario.dia.toLowerCase()
-                +" de "
-                + minToTimeFilter(r.horario.horaInicio)
-                + " a "
-                + minToTimeFilter(r.horario.horaFin)
-                + " con "
-                + r.cantidadJugadores
-                +" jugadores");
+        function showHorarioMasCercano() {
+            return vm.saludo != null;
+        }
+
+        function getHorarioMasCercano() {
+            $q.all([Horario.mostRecent().$promise, getAccount()])
+                .then(function (result) {
+                    var r = result[0], u = result[1];
+                    vm.saludo = {
+                        saludoNombre: {
+                            firstName: u.firstName
+                        },
+                        rangoTiempo: {
+                            horaInicio: minToTimeFilter(r.horario.horaInicio),
+                            horaFin: minToTimeFilter(r.horario.horaFin),
+                        },
+                        cantidadJugadores: {
+                            cantidad: r.cantidadJugadores
+                        },
+                        dia: r.horario.dia,
+                    };
+                });
         }
     }
 })();

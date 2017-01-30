@@ -11,6 +11,13 @@
                 <div class="alert alert-success" ng-switch-when="true" data-translate="home.logged.message" translate-values="{username: '{{vm.account.login}}'}">
                     You are logged in as user "{{vm.account.login}}".
                 </div>
+                <div ng-if="vm.showHorarioMasCercano();" class="alert alert-success" ng-switch-when="true">
+                    <spam data-translate="home.saludo.saludoNombre" translate-values="vm.saludo.saludoNombre"></spam>
+                    <spam data-translate="home.saludo.diaEntrenamiento"></spam>
+                    <spam data-translate="escuelitaParajelesFloroApp.Dia.{{vm.saludo.dia}}"></spam>
+                    <spam data-translate="home.saludo.rangoTiempo" translate-values="vm.saludo.rangoTiempo"></spam>
+                    <spam data-translate="home.saludo.cantidadJugadores" translate-values="vm.saludo.cantidadJugadores"></spam>
+                </div>
 
                 <div class="alert alert-warning" ng-switch-when="true" data-translate="global.messages.info.authenticated" translate-compile>
                     If you want to <a class="alert-link" href="" ng-click="vm.login()">sign in</a>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").
