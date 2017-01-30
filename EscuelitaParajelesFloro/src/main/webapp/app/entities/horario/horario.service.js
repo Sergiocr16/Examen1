@@ -20,7 +20,11 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'mostRecent' : {
+                method: 'GET',
+                url: 'api/horarioMasCercano'
+            }
         });
     }
 })();

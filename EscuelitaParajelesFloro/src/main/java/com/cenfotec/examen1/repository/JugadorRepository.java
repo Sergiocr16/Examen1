@@ -12,4 +12,5 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface JugadorRepository extends JpaRepository<Jugador,Long> {
 
+    Integer countByEdad(Integer edad);
 }
