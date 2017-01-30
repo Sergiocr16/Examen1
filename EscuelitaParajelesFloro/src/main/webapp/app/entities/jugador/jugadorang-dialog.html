@@ -1,0 +1,98 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myJugadorLabel" data-translate="escuelitaParajelesFloroApp.jugador.home.createOrEditLabel">Create or edit a Jugador</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.jugador.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.jugador.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="escuelitaParajelesFloroApp.jugador.nombre" for="field_nombre">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="field_nombre"
+                    ng-model="vm.jugador.nombre"
+                    required />
+            <div ng-show="editForm.nombre.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.nombre.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="escuelitaParajelesFloroApp.jugador.apellido" for="field_apellido">Apellido</label>
+            <input type="text" class="form-control" name="apellido" id="field_apellido"
+                    ng-model="vm.jugador.apellido"
+                    required />
+            <div ng-show="editForm.apellido.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.apellido.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="escuelitaParajelesFloroApp.jugador.edad" for="field_edad">Edad</label>
+            <input type="number" class="form-control" name="edad" id="field_edad"
+                    ng-model="vm.jugador.edad"
+                    required min="0" />
+            <div ng-show="editForm.edad.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.edad.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.edad.$error.min" data-translate="entity.validation.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.edad.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="escuelitaParajelesFloroApp.jugador.cedula" for="field_cedula">Cedula</label>
+            <input type="text" class="form-control" name="cedula" id="field_cedula"
+                    ng-model="vm.jugador.cedula"
+                    required ng-pattern="/^0?\d(-?\d{4}){2}$/" />
+            <div ng-show="editForm.cedula.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.cedula.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.cedula.$error.pattern" data-translate="entity.validation.pattern" translate-value-pattern="^0?\d(-?\d{4}){2}$">
+                    This field should follow pattern "^0?\d(-?\d{4}){2}$".
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="escuelitaParajelesFloroApp.jugador.posicion" for="field_posicion">Posicion</label>
+            <input type="text" class="form-control" name="posicion" id="field_posicion"
+                    ng-model="vm.jugador.posicion"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="escuelitaParajelesFloroApp.jugador.responsable" for="field_responsable">Responsable</label>
+            <select class="form-control" id="field_responsable" name="responsable" ng-model="vm.jugador.responsableId" ng-options="responsable.id as responsable.email for responsable in vm.responsables"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

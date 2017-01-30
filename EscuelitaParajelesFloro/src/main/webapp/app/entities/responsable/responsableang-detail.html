@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span data-translate="escuelitaParajelesFloroApp.responsable.detail.title">Responsable</span> {{vm.responsable.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="escuelitaParajelesFloroApp.responsable.nombre">Nombre</span></dt>
+        <dd>
+            <span>{{vm.responsable.nombre}}</span>
+        </dd>
+        <dt><span data-translate="escuelitaParajelesFloroApp.responsable.apellido">Apellido</span></dt>
+        <dd>
+            <span>{{vm.responsable.apellido}}</span>
+        </dd>
+        <dt><span data-translate="escuelitaParajelesFloroApp.responsable.email">Email</span></dt>
+        <dd>
+            <span>{{vm.responsable.email}}</span>
+        </dd>
+        <dt><span data-translate="escuelitaParajelesFloroApp.responsable.telefono">Telefono</span></dt>
+        <dd>
+            <span>{{vm.responsable.telefono}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="responsableang-detail.edit({id:vm.responsable.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

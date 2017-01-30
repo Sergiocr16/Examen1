@@ -1,0 +1,124 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myEntrenamientoLabel" data-translate="escuelitaParajelesFloroApp.entrenamiento.home.createOrEditLabel">Create or edit a Entrenamiento</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.entrenamiento.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.entrenamiento.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="escuelitaParajelesFloroApp.entrenamiento.descripcion" for="field_descripcion">Descripcion</label>
+            <input type="text" class="form-control" name="descripcion" id="field_descripcion"
+                    ng-model="vm.entrenamiento.descripcion"
+                    required />
+            <div ng-show="editForm.descripcion.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.descripcion.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="escuelitaParajelesFloroApp.entrenamiento.fecha" for="field_fecha">Fecha</label>
+                <div class="input-group">
+                    <input id="field_fecha" type="text" class="form-control" name="fecha" uib-datepicker-popup="{{dateformat}}" ng-model="vm.entrenamiento.fecha" is-open="vm.datePickerOpenStatus.fecha"
+                    required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fecha')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.fecha.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.fecha.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="escuelitaParajelesFloroApp.entrenamiento.horaInicio" for="field_horaInicio">Hora Inicio</label>
+            <input type="number" class="form-control" name="horaInicio" id="field_horaInicio"
+                    ng-model="vm.entrenamiento.horaInicio"
+                    required min="0" max="1439" />
+            <div ng-show="editForm.horaInicio.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.horaInicio.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.horaInicio.$error.min" data-translate="entity.validation.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.horaInicio.$error.max" data-translate="entity.validation.max" translate-value-max="1439">
+                    This field cannot be more than 1439.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.horaInicio.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="escuelitaParajelesFloroApp.entrenamiento.horaFin" for="field_horaFin">Hora Fin</label>
+            <input type="number" class="form-control" name="horaFin" id="field_horaFin"
+                    ng-model="vm.entrenamiento.horaFin"
+                    required min="0" max="1439" />
+            <div ng-show="editForm.horaFin.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.horaFin.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.horaFin.$error.min" data-translate="entity.validation.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.horaFin.$error.max" data-translate="entity.validation.max" translate-value-max="1439">
+                    This field cannot be more than 1439.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.horaFin.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="escuelitaParajelesFloroApp.entrenamiento.categoria" for="field_categoria">Categoria</label>
+            <input type="number" class="form-control" name="categoria" id="field_categoria"
+                    ng-model="vm.entrenamiento.categoria"
+                    required />
+            <div ng-show="editForm.categoria.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.categoria.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.categoria.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="escuelitaParajelesFloroApp.entrenamiento.entrenador" for="field_entrenador">Entrenador</label>
+            <select class="form-control" id="field_entrenador" name="entrenador" ng-model="vm.entrenamiento.entrenadorId" ng-options="user.id as user.login for user in vm.users"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

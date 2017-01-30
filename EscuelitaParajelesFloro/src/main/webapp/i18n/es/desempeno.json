@@ -1,0 +1,25 @@
+{
+    "escuelitaParajelesFloroApp": {
+        "desempeno" : {
+            "home": {
+                "title": "Desempenos",
+                "createLabel": "Crear nuevo Desempeno",
+                "createOrEditLabel": "Crear o editar Desempeno",
+                "search": "Search for Desempeno"
+            },
+            "created": "Un nuevo Desempeno ha sido creado con el identificador {{ param }}",
+            "updated": "Un Desempeno ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Desempeno ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Desempeno {{ id }}?"
+            },
+            "detail": {
+                "title": "Desempeno"
+            },
+            "calificacion": "Calificacion",
+            "notas": "Notas",
+            "jugador": "Jugador",
+            "entrenamiento": "Entrenamiento"
+        }
+    }
+}

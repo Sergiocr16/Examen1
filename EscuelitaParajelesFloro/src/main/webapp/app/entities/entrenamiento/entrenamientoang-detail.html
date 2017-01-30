@@ -1,0 +1,43 @@
+
+<div>
+    <h2><span data-translate="escuelitaParajelesFloroApp.entrenamiento.detail.title">Entrenamiento</span> {{vm.entrenamiento.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="escuelitaParajelesFloroApp.entrenamiento.descripcion">Descripcion</span></dt>
+        <dd>
+            <span>{{vm.entrenamiento.descripcion}}</span>
+        </dd>
+        <dt><span data-translate="escuelitaParajelesFloroApp.entrenamiento.fecha">Fecha</span></dt>
+        <dd>
+            <span>{{vm.entrenamiento.fecha | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="escuelitaParajelesFloroApp.entrenamiento.horaInicio">Hora Inicio</span></dt>
+        <dd>
+            <span>{{vm.entrenamiento.horaInicio}}</span>
+        </dd>
+        <dt><span data-translate="escuelitaParajelesFloroApp.entrenamiento.horaFin">Hora Fin</span></dt>
+        <dd>
+            <span>{{vm.entrenamiento.horaFin}}</span>
+        </dd>
+        <dt><span data-translate="escuelitaParajelesFloroApp.entrenamiento.categoria">Categoria</span></dt>
+        <dd>
+            <span>{{vm.entrenamiento.categoria}}</span>
+        </dd>
+        <dt><span data-translate="escuelitaParajelesFloroApp.entrenamiento.entrenador">Entrenador</span></dt>
+        <dd>
+            {{vm.entrenamiento.entrenadorLogin}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="entrenamientoang-detail.edit({id:vm.entrenamiento.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

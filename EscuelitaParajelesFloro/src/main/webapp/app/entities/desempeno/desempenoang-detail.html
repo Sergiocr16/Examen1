@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span data-translate="escuelitaParajelesFloroApp.desempeno.detail.title">Desempeno</span> {{vm.desempeno.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="escuelitaParajelesFloroApp.desempeno.calificacion">Calificacion</span></dt>
+        <dd>
+            <span>{{vm.desempeno.calificacion}}</span>
+        </dd>
+        <dt><span data-translate="escuelitaParajelesFloroApp.desempeno.notas">Notas</span></dt>
+        <dd>
+            <span>{{vm.desempeno.notas}}</span>
+        </dd>
+        <dt><span data-translate="escuelitaParajelesFloroApp.desempeno.jugador">Jugador</span></dt>
+        <dd>
+            <a ui-sref="jugadorang-detail({id:vm.desempeno.jugadorId})">{{vm.desempeno.jugadorCedula}}</a>
+        </dd>
+        <dt><span data-translate="escuelitaParajelesFloroApp.desempeno.entrenamiento">Entrenamiento</span></dt>
+        <dd>
+            <a ui-sref="entrenamientoang-detail({id:vm.desempeno.entrenamientoId})">{{vm.desempeno.entrenamientoDescripcion}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="desempenoang-detail.edit({id:vm.desempeno.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,66 @@
+<div>
+    <h2 data-translate="escuelitaParajelesFloroApp.horario.home.title">Horarios</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="horarioang.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="escuelitaParajelesFloroApp.horario.home.createLabel">
+                        Create new Horario
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="horaInicio"><span data-translate="escuelitaParajelesFloroApp.horario.horaInicio">Hora Inicio</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="horaFin"><span data-translate="escuelitaParajelesFloroApp.horario.horaFin">Hora Fin</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dia"><span data-translate="escuelitaParajelesFloroApp.horario.dia">Dia</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="categoria"><span data-translate="escuelitaParajelesFloroApp.horario.categoria">Categoria</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="horario in vm.horarios track by horario.id">
+                    <td><a ui-sref="horarioang-detail({id:horario.id})">{{horario.id}}</a></td>
+                    <td>{{horario.horaInicio}}</td>
+                    <td>{{horario.horaFin}}</td>
+                    <td data-translate="{{'escuelitaParajelesFloroApp.Dia.' + horario.dia}}">{{horario.dia}}</td>
+                    <td>{{horario.categoria}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="horarioang-detail({id:horario.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="horarioang.edit({id:horario.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="horarioang.delete({id:horario.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
+</div>
