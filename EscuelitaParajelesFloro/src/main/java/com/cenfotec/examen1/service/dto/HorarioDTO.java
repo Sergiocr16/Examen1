@@ -4,11 +4,13 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.cenfotec.examen1.constrains.HorarioDTOTimeConstrain;
 import com.cenfotec.examen1.domain.enumeration.Dia;
 
 /**
  * A DTO for the Horario entity.
  */
+@HorarioDTOTimeConstrain(message = "HoraInicio debe ser menor a horaFin")
 public class HorarioDTO implements Serializable {
 
     private Long id;
@@ -89,7 +91,7 @@ public class HorarioDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "HorarioDTO{" +
+        return "HorarioDTOTimeConstrain{" +
             "id=" + id +
             ", horaInicio='" + horaInicio + "'" +
             ", horaFin='" + horaFin + "'" +

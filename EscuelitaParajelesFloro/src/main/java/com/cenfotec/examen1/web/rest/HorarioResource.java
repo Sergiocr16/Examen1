@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 public class HorarioResource {
 
     private final Logger log = LoggerFactory.getLogger(HorarioResource.class);
-        
+
     @Inject
     private HorarioService horarioService;
 
@@ -49,14 +49,30 @@ public class HorarioResource {
     public ResponseEntity<HorarioDTO> createHorario(@Valid @RequestBody HorarioDTO horarioDTO) throws URISyntaxException {
         log.debug("REST request to save Horario : {}", horarioDTO);
         if (horarioDTO.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("horario", "idexists", "A new horario cannot already have an ID")).body(null);
+            return ResponseEntity.badRequest()
+                .headers(HeaderUtil.createFailureAlert(
+                    "horario",
+                    "idexists",
+                    "A new horario cannot already have an ID"))
+                .body(null);
+        }
+
+        Optional<?> h = horarioService.intersection(horarioDTO);
+        if (h.isPresent()) {
+            return ResponseEntity.badRequest()
+                .headers(HeaderUtil.createFailureAlert(
+                    "horario",
+                    "horariointersect",
+                    "Este horario choca con 1 o mas horarios"))
+                .body(null);
         }
         HorarioDTO result = horarioService.save(horarioDTO);
         return ResponseEntity.created(new URI("/api/horarios/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("horario", result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(
+                "horario",
+                result.getId().toString()))
             .body(result);
     }
-
     /**
      * PUT  /horarios : Updates an existing horario.
      *
@@ -73,10 +89,22 @@ public class HorarioResource {
         if (horarioDTO.getId() == null) {
             return createHorario(horarioDTO);
         }
-        HorarioDTO result = horarioService.save(horarioDTO);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("horario", horarioDTO.getId().toString()))
-            .body(result);
+        return horarioService.intersection(horarioDTO)
+            .map(h ->
+                ResponseEntity.badRequest()
+                    .headers(HeaderUtil.createFailureAlert(
+                        "horario",
+                        "horariointersect",
+                        "Este horario choca con 1 o mas horarios"))
+                    .body((HorarioDTO)null))
+            .orElseGet(()-> {
+                HorarioDTO result = horarioService.save(horarioDTO);
+                return ResponseEntity.ok()
+                    .headers(HeaderUtil.createEntityUpdateAlert(
+                        "horario",
+                        horarioDTO.getId().toString()))
+                    .body(result);
+            });
     }
 
     /**

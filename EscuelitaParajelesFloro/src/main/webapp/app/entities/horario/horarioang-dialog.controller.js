@@ -14,6 +14,7 @@
         vm.clear = clear;
         vm.save = save;
         vm.showTime = showTime;
+        vm.change = change;
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -33,10 +34,14 @@
             $uibModalInstance.dismiss('cancel');
         }
 
-        function save () {
-            vm.isSaving = true;
+        function change() {
             vm.horario.horaInicio = vm.IniH * 60 + vm.IniM;
             vm.horario.horaFin = vm.FinH * 60 + vm.FinM;
+        }
+
+        function save () {
+            vm.isSaving = true;
+
             if (vm.horario.id !== null) {
                 Horario.update(vm.horario, onSaveSuccess, onSaveError);
             } else {

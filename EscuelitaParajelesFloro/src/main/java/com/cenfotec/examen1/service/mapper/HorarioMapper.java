@@ -7,7 +7,7 @@ import org.mapstruct.*;
 import java.util.List;
 
 /**
- * Mapper for the entity Horario and its DTO HorarioDTO.
+ * Mapper for the entity Horario and its DTO HorarioDTOTimeConstrain.
  */
 @Mapper(componentModel = "spring", uses = {})
 public interface HorarioMapper {

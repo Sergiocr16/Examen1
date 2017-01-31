@@ -29,8 +29,8 @@
             <tbody>
                 <tr ng-repeat="horario in vm.horarios track by horario.id">
                     <td><a ui-sref="horarioang-detail({id:horario.id})">{{horario.id}}</a></td>
-                    <td>{{horario.horaInicio}}</td>
-                    <td>{{horario.horaFin}}</td>
+                    <td>{{horario.horaInicio | minToTime}}</td>
+                    <td>{{horario.horaFin | minToTime}}</td>
                     <td data-translate="{{'escuelitaParajelesFloroApp.Dia.' + horario.dia}}">{{horario.dia}}</td>
                     <td>{{horario.categoria}}</td>
                     <td class="text-right">

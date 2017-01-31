@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 public class HorarioService {
 
     private final Logger log = LoggerFactory.getLogger(HorarioService.class);
-    
+
     @Inject
     private HorarioRepository horarioRepository;
 
@@ -47,11 +48,11 @@ public class HorarioService {
 
     /**
      *  Get all the horarios.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<HorarioDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Horarios");
         Page<Horario> result = horarioRepository.findAll(pageable);
@@ -64,7 +65,7 @@ public class HorarioService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public HorarioDTO findOne(Long id) {
         log.debug("Request to get Horario : {}", id);
         Horario horario = horarioRepository.findOne(id);
@@ -80,5 +81,13 @@ public class HorarioService {
     public void delete(Long id) {
         log.debug("Request to delete Horario : {}", id);
         horarioRepository.delete(id);
+    }
+
+    public Optional<HorarioDTO> intersection(HorarioDTO h) {
+        return horarioRepository
+            .findIntersectors(horarioMapper.horarioDTOToHorario(h))
+            .filter(hor -> !hor.getId().equals(h.getId()))
+            .findAny()
+            .map(horarioMapper::horarioToHorarioDTO);
     }
 }
