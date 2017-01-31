@@ -21,7 +21,8 @@
             "dia": "Dia",
             "categoria": "Categoria",
             "minutes" : "Minutos",
-            "hours" : "Horas"
+            "hours" : "Horas",
+            "lessThanValidation" : "El tiempo de inicio de ser menor al final."
         }
     }
 }

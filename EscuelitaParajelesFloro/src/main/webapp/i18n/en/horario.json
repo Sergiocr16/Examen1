@@ -21,7 +21,8 @@
             "dia": "Dia",
             "categoria": "Categoria",
             "minutes" : "Minutes",
-            "hours" : "Hours"
+            "hours" : "Hours",
+            "lessThanValidation" : "Inicial time must be less than final time."
         }
     }
 }
