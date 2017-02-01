@@ -16,8 +16,9 @@
         vm.openCalendar = openCalendar;
         vm.save = save;
         vm.desempenos = Desempeno.query();
-        vm.users = User.query();
-
+        User.byRole({role: 'ROLE_COUCH'}, function(result) {
+            vm.users = result;
+        });
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });

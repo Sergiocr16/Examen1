@@ -1,6 +1,7 @@
 package com.cenfotec.examen1.web.rest;
 
 import com.cenfotec.examen1.config.Constants;
+import com.cenfotec.examen1.service.dto.UserDTO;
 import com.codahale.metrics.annotation.Timed;
 import com.cenfotec.examen1.domain.User;
 import com.cenfotec.examen1.repository.UserRepository;
@@ -87,17 +88,25 @@ public class UserResource {
         //Lowercase the user login before comparing with database
         if (userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).isPresent()) {
             return ResponseEntity.badRequest()
-                .headers(HeaderUtil.createFailureAlert("userManagement", "userexists", "Login already in use"))
+                .headers(HeaderUtil.createFailureAlert(
+                    "userManagement",
+                    "userexists",
+                    "Login already in use"))
                 .body(null);
         } else if (userRepository.findOneByEmail(managedUserVM.getEmail()).isPresent()) {
             return ResponseEntity.badRequest()
-                .headers(HeaderUtil.createFailureAlert("userManagement", "emailexists", "Email already in use"))
+                .headers(HeaderUtil.createFailureAlert(
+                    "userManagement",
+                    "emailexists",
+                    "Email already in use"))
                 .body(null);
         } else {
             User newUser = userService.createUser(managedUserVM);
             mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
-                .headers(HeaderUtil.createAlert( "userManagement.created", newUser.getLogin()))
+                .headers(HeaderUtil.createAlert(
+                    "userManagement.created",
+                    newUser.getLogin()))
                 .body(newUser);
         }
     }
@@ -117,18 +126,38 @@ public class UserResource {
         log.debug("REST request to update User : {}", managedUserVM);
         Optional<User> existingUser = userRepository.findOneByEmail(managedUserVM.getEmail());
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(managedUserVM.getId()))) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("userManagement", "emailexists", "E-mail already in use")).body(null);
+            return ResponseEntity
+                .badRequest()
+                .headers(HeaderUtil.createFailureAlert(
+                    "userManagement",
+                    "emailexists",
+                    "E-mail already in use"))
+                .body(null);
         }
         existingUser = userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase());
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(managedUserVM.getId()))) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("userManagement", "userexists", "Login already in use")).body(null);
+            return ResponseEntity
+                .badRequest()
+                .headers(HeaderUtil.createFailureAlert(
+                    "userManagement",
+                    "userexists",
+                    "Login already in use"))
+                .body(null);
         }
-        userService.updateUser(managedUserVM.getId(), managedUserVM.getLogin(), managedUserVM.getFirstName(),
-            managedUserVM.getLastName(), managedUserVM.getEmail(), managedUserVM.isActivated(),
-            managedUserVM.getLangKey(), managedUserVM.getAuthorities());
+        userService.updateUser(
+            managedUserVM.getId(),
+            managedUserVM.getLogin(),
+            managedUserVM.getFirstName(),
+            managedUserVM.getLastName(),
+            managedUserVM.getEmail(),
+            managedUserVM.isActivated(),
+            managedUserVM.getLangKey(),
+            managedUserVM.getAuthorities());
 
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createAlert("userManagement.updated", managedUserVM.getLogin()))
+            .headers(HeaderUtil.createAlert(
+                "userManagement.updated",
+                managedUserVM.getLogin()))
             .body(new ManagedUserVM(userService.getUserWithAuthorities(managedUserVM.getId())));
     }
 
@@ -179,6 +208,22 @@ public class UserResource {
     public ResponseEntity<Void> deleteUser(@PathVariable String login) {
         log.debug("REST request to delete User: {}", login);
         userService.deleteUser(login);
-        return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.deleted", login)).build();
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createAlert(
+                "userManagement.deleted",
+                login))
+            .build();
+    }
+
+    @GetMapping("/usersByRol/{role}")
+    @Timed
+    public ResponseEntity<List<UserDTO>> getUserByRol(@PathVariable String role)
+        throws URISyntaxException {
+        List<UserDTO> listUsers  = userService.getUserByRole(role)
+            .stream()
+            .map(UserDTO::new)
+            .collect(Collectors.toList());
+        return new ResponseEntity<>(listUsers, HttpStatus.OK);
     }
 }

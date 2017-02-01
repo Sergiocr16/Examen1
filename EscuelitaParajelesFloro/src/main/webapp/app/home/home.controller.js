@@ -5,9 +5,9 @@
         .module('escuelitaParajelesFloroApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state', 'minToTimeFilter', 'Horario', 'AlertService', '$q', '$translate'];
+    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state', 'minToTimeFilter', 'Horario', '$q'];
 
-    function HomeController ($scope, Principal, LoginService, $state, minToTimeFilter, Horario, AlertService, $q, $translate) {
+    function HomeController ($scope, Principal, LoginService, $state, minToTimeFilter, Horario, $q) {
         var vm = this;
 
         vm.account = null;
