@@ -31,6 +31,9 @@ public class CHorarioService {
 
     private final Logger log = LoggerFactory.getLogger(HorarioService.class);
 
+    private final int NUM_DIA  = 7;
+    private final int MIN_IN_H = 60;
+
     @Inject
     private HorarioRepository horarioRepository;
     @Inject
@@ -41,9 +44,6 @@ public class CHorarioService {
 
     @Transactional(readOnly = true)
     public Optional<HorarioDTO> horarioMasCercano() {
-
-        final int NUM_DIA  = 7;
-        final int MIN_IN_H = 60;
 
         LocalDateTime dt = LocalDateTime.now();
         int minutos      = dt.getHour() * MIN_IN_H + dt.getMinute();
@@ -58,7 +58,7 @@ public class CHorarioService {
         Map<Dia, Horario> map = horarioRepository.findMinHorarios()
             .collect(Collectors.toMap(Horario::getDia, Function.identity()));
         return IntStream
-            .iterate(dayNum, i -> (i + 1) % NUM_DIA)
+            .iterate(dayNum % NUM_DIA, i -> (i + 1) % NUM_DIA)
             .mapToObj(i -> dias[i])
             .limit(NUM_DIA)
             .map(map::get)

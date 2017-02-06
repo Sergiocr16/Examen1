@@ -7,9 +7,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <div class="navbar-brand logo">
+                <particle-image
+                    width="65"
+                    height="45"
+                    spacing="2"
+                    size="1"
+                    image="vm.image"
+                    radius="15"/>
+            </div>
             <a class="navbar-brand logo" href="#/" ng-click="vm.collapseNavbar()">
-                <img class="logo-img" src="content/images/logo-jhipster.png" alt="logo"/>
-                <span data-translate="global.title">EscuelitaParajelesFloro</span> <span class="navbar-version">v{{VERSION}}</span>
+                <img class="logo-img" />
+                <span data-translate="global.title">EscuelitaParajelesFloro</span>
             </a>
         </div>
         <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
