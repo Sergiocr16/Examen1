@@ -9,11 +9,10 @@
         .factory('ImageUtil', ImageUtil);
 
     function ImageUtil () {
-
         function preloadImages(srcs) {
             function loadImage(src) {
                 return new Promise(function(resolve, reject) {
-                    var img = new Image();
+                    let img = new Image();
                     img.onload = function() {
                         resolve(img);
                     };
@@ -23,45 +22,36 @@
                     img.src = src;
                 });
             }
-            var promises = [];
-            for (var i = 0; i < srcs.length; i++) {
-                promises.push(loadImage(srcs[i]));
-            }
-            return Promise.all(promises);
+            return Promise.all(srcs.map(loadImage));
         }
 
+        function* forEachPixel(context,  spacing, predicate) {
+            let width  = context.canvas.width;
+            let height = context.canvas.height;
+            let pixels = context.getImageData(0, 0, width, height).data;
 
-
-        function forEachPixel(context,  spacing, callback, predicate) {
-            var width  = context.canvas.width;
-            var height = context.canvas.height;
-            var pixels = context.getImageData(0, 0, width, height).data;
-
-            for(var y = 0; y < height; y += spacing) {
-                for (var x = 0; x < width; x += spacing) {
-                    var i = (y * width + x) * 4;
-                    var RGBA = {
+            for(let y = 0; y < height; y += spacing) {
+                for (let x = 0; x < width; x += spacing) {
+                    let i = (y * width + x) * 4;
+                    let RGBA = {
                         R: pixels[i], G: pixels[i + 1],
                         B: pixels[i + 2], A: pixels[i + 3]
-                    }
+                    };
                     if (predicate(RGBA)) {
-                        callback(x, y, RGBA);
+                        yield [x, y, RGBA];
                     }
                 }
             }
         }
 
-        function forEachAlphaPixel(context,  spacing, callback) {
-            function isAlpha(RGBA) {
-                return RGBA.A > 0;
-            }
-            forEachPixel(context,  spacing, callback, isAlpha)
+        function forEachAlphaPixel(context,  spacing) {
+            return forEachPixel(context,  spacing, RGBA => RGBA.A > 0);
         }
 
-      return {
-          forEachPixel: forEachPixel,
-          forEachAlphaPixel: forEachAlphaPixel,
-          preloadImages: preloadImages
-      }
+        return {
+            forEachPixel: forEachPixel,
+            forEachAlphaPixel: forEachAlphaPixel,
+            preloadImages: preloadImages
+        };
     }
 })();

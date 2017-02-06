@@ -15,13 +15,15 @@ var fs = require('fs'),
     revReplace = require("gulp-rev-replace"),
     plumber = require('gulp-plumber'),
     gulpIf = require('gulp-if'),
-    handleErrors = require('./handle-errors');
+    handleErrors = require('./handle-errors'),
+    babel = require("gulp-babel");
 
 var config = require('./config');
 
 var initTask = lazypipe()
     .pipe(sourcemaps.init);
 var jsTask = lazypipe()
+    .pipe(babel)
     .pipe(ngAnnotate)
     .pipe(uglify);
 var cssTask = lazypipe()

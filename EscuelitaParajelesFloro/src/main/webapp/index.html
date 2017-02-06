@@ -32,7 +32,14 @@
         </div>
 
         <div class="footer" ng-cloak>
-
+            <particle-image
+                width="350"
+                height="150"
+                spacing="4"
+                ease="0.1"
+                size="3"
+                src="['content/images/firefly-logo.png', 'content/images/firefly_logo2.png', 'content/images/firefly_logo3.png']"
+                radius="40"/>
         </div>
     </div>
 
@@ -99,8 +106,9 @@
     <script src="app/layouts/error/error.state.js"></script>
     <script src="app/home/home.state.js"></script>
     <script src="app/home/home.controller.js"></script>
-    <script src="app/filters/time.filter.js"></script>
+    <script src="app/filters/timeToMin.js"></script>
     <script src="app/filters/shuffle.filter.js"></script>
+    <script src="app/filters/minToTime.filter.js"></script>
     <script src="app/entities/responsable/responsableang-dialog.controller.js"></script>
     <script src="app/entities/responsable/responsableang-detail.controller.js"></script>
     <script src="app/entities/responsable/responsableang-delete-dialog.controller.js"></script>
@@ -144,7 +152,7 @@
     <script src="app/components/util/data-util.service.js"></script>
     <script src="app/components/util/capitalize.filter.js"></script>
     <script src="app/components/util/base64.service.js"></script>
-    <script src="app/components/particle/slideShowParticle.directive.js"></script>
+    <script src="app/components/particle/particleImageAnimator.service.js"></script>
     <script src="app/components/particle/particleImage.directive.js"></script>
     <script src="app/components/particle/particle.service.js"></script>
     <script src="app/components/login/login.service.js"></script>

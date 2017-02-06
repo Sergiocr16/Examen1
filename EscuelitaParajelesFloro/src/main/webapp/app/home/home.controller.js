@@ -5,9 +5,9 @@
         .module('escuelitaParajelesFloroApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state', 'minToTimeFilter', 'Horario', '$q'];
+    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state', 'minToTimeFilter', 'Horario'];
 
-    function HomeController ($scope, Principal, LoginService, $state, minToTimeFilter, Horario, $q) {
+    function HomeController ($scope, Principal, LoginService, $state, minToTimeFilter, Horario) {
         var vm = this;
 
         vm.account = null;
@@ -18,45 +18,41 @@
         vm.register = register;
         vm.showHorarioMasCercano = showHorarioMasCercano;
 
-        $scope.$on('authenticationSuccess', function() {
-            getHorarioMasCercano();
-        });
-
+        $scope.$on('authenticationSuccess', getHorarioMasCercano);
         getHorarioMasCercano();
 
         function getAccount() {
-           return Principal.identity().then(function(account) {
-                vm.account = account;
-                vm.isAuthenticated = Principal.isAuthenticated;
-                return account;
-            });
+            return Principal.identity()
+               .then(account => {
+                   vm.account = account;
+                   vm.isAuthenticated = Principal.isAuthenticated;
+                   return account;
+               });
         }
         function register () {
             $state.go('register');
         }
 
         function showHorarioMasCercano() {
-            return vm.saludo != null;
+            return vm.saludo !== null;
         }
 
         function getHorarioMasCercano() {
-            $q.all([Horario.mostRecent().$promise, getAccount()])
-                .then(function (result) {
-                    var r = result[0], u = result[1];
-                    vm.saludo = {
-                        saludoNombre: {
-                            firstName: u.firstName
-                        },
-                        rangoTiempo: {
-                            horaInicio: minToTimeFilter(r.horario.horaInicio),
-                            horaFin: minToTimeFilter(r.horario.horaFin),
-                        },
-                        cantidadJugadores: {
-                            cantidad: r.cantidadJugadores
-                        },
-                        dia: r.horario.dia,
-                    };
-                });
+            Promise.all([Horario.mostRecent().$promise, getAccount()])
+                   .then(([r, u]) => {
+                       vm.saludo = {
+                           saludoNombre: {
+                               firstName: u.firstName
+                           },
+                           rangoTiempo: {
+                               horaInicio: minToTimeFilter(r.horario.horaInicio),
+                               horaFin: minToTimeFilter(r.horario.horaFin),
+                           },
+                           cantidadJugadores: {
+                               cantidad: r.cantidadJugadores
+                           },
+                           dia: r.horario.dia,
+                       };});
         }
     }
 })();

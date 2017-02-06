@@ -18,14 +18,6 @@
             vm.swaggerEnabled = response.swaggerEnabled;
         });
 
-        var image = new Image;
-        image.src = 'content/images/firefly.png';
-        image.onload = function (event) {
-            console.log(image)
-            vm.image = image;
-        }
-
-
         vm.login = login;
         vm.logout = logout;
         vm.toggleNavbar = toggleNavbar;

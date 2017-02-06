@@ -8,137 +8,197 @@
     'use strict';
     angular
         .module('escuelitaParajelesFloroApp')
-        .factory('Particle', ParticleService);
+        .factory('Particle', ParticleFactory);
 
-    ParticleService.$inject = ['$resource'];
 
-    function ParticleService ($resource) {
-        function ParticleBuilder (particleAttributes) {
+    function ParticleFactory () {
 
-            var b = this;
 
-            b.x = b.originX = 0;
-            b.y = b.originY = 0 ;
-            b.color = '#000000';
-
-            b.commonAttr = {
-                friction:  0.95,
-                ease: 0.1,
-                size:  3,
-                motionColor: undefined,
-            };
-
-            function Particle(x, y, originX, originY, color) {
+        class Particle {
+            constructor(x, y, originX, originY, color, atributes) {
                 this.originalColor = this.color = color;
-                this.x = this.originX = x;
-                this.y = this.originY = y;
+                this.originX       = originX;
+                this.originY       = originY;
+                this.atributes     = atributes;
+
+                this.x  = x;
+                this.y  = y;
                 this.vx = 0;
                 this.vy = 0;
-            };
+            }
 
-            Particle.prototype.inOrigin = function() {
-                return  Math.abs(this.originY - this.y) < 1
+            inOrigin() {
+                return Math.abs(this.originY - this.y) < 1
                     && Math.abs(this.originX - this.x) < 1;
-            };
+            }
 
-            Particle.prototype.update = function(mouse) {
-                var rx = mouse.x - this.x;
-                var ry = mouse.y - this.y;
-                var distance = rx * rx + ry * ry;
+            update({radius: r, x: mx, y: my}) {
+                let rx = mx - this.x;
+                let ry = my - this.y;
+                let distance = rx * rx + ry * ry;
 
-                if(distance < mouse.radius) {
-                    var force = -mouse.radius / distance;
-                    var angle = Math.atan2(ry, rx);
+                if (distance < r) {
+                    let force = -r / distance;
+                    let angle = Math.atan2(ry, rx);
                     this.vx += force * Math.cos(angle);
                     this.vy += force * Math.sin(angle);
                 }
-                this.x += (this.vx *=  b.commonAttr.friction)
-                    + (this.originX - this.x) * b.commonAttr.ease;
+                this.x += (this.vx *= this.atributes.friction)
+                       + (this.originX - this.x)
+                       * this.atributes.ease;
 
-                this.y += (this.vy *= b.commonAttr.friction)
-                    + (this.originY - this.y) * b.commonAttr.ease;
+                this.y += (this.vy *= this.atributes.friction)
+                       + (this.originY - this.y)
+                       * this.atributes.ease;
 
                 this.color = this.inOrigin()
                     ? this.originalColor
-                    : b.commonAttr.motionColor;
+                    : this.motionColor;
 
-                this.color = this.color || this.originalColor;
-            };
+                this.color = this.color
+                    || this.originalColor;
+            }
 
-            Particle.prototype.reset = function(x, y, color) {
+            reset(x, y, color) {
                 this.originalColor = color;
                 this.originX = x;
                 this.originY = y;
-            };
+            }
 
-            Particle.prototype.draw = function(context) {
+            draw(context) {
                 context.fillStyle = this.color;
                 context.fillRect(this.x, this.y,
-                    b.commonAttr.size,
-                    b.commonAttr.size)
-            };
+                    this.atributes.size,
+                    this.atributes.size);
+            }
+        }
+        class ParticleBuilder {
 
-            this.build = function() {
-                return new Particle(b.x, b.y,
-                    b.originX, b.originY, b.color);
-            };
+            constructor() {
+                this.x = this.originX = 0;
+                this.y = this.originY = 0 ;
+                this.color = '#000000';
 
-            this.setColor = function(color) {
-                b.color = color;
-                return b;
-            };
+                this.commonAttr = {
+                    friction:  0.95,
+                    ease: 0.1,
+                    size:  3,
+                    motionColor: undefined,
+                };
+            }
 
-            this.setOriginX = function(x) {
+            build() {
+                return new Particle(
+                    this.x, this.y,
+                    this.originX,
+                    this.originY,
+                    this.color,
+                    this.commonAttr);
+            }
+
+            setColor(color) {
+                this.color = color;
+                return this;
+            }
+
+            setOriginX(x) {
                 this.originX = x;
-                return b;
-            };
-            this.setOriginY = function(y) {
+                return this;
+            }
+            setOriginY(y) {
                 this.originY = y;
-                return b;
-            };
-            this.setX = function(x) {
+                return this;
+            }
+
+            setX(x) {
                 this.x = x;
-                return b;
-            };
+                return this;
+            }
 
-            this.setY = function(y) {
+            setY(y) {
                 this.y = y;
-                return b;
-            };
-            this.setLocation = function(x, y) {
-                return b.setX(x).setY(y).setOriginX(x).setOriginY(y);
-            };
+                return this;
+            }
+
+            setLocation (x, y) {
+                return this
+                    .setX(x)
+                    .setY(y)
+                    .setOriginX(x)
+                    .setOriginY(y);
+            }
 
 
-            this.setMotionColor = function(color) {
-                b.commonAttr.motionColor = color
-                    ||  b.commonAttr.motionColor;
-                return b;
-            };
+            setMotionColor (color) {
+                this.commonAttr.motionColor = color
+                    ||  this.commonAttr.motionColor;
+                return this;
+            }
 
-            this.setEase = function(ease) {
-                b.commonAttr.ease = ease
-                    ||  b.commonAttr.ease;
-                return b;
-            };
+            setEase(ease) {
+                this.commonAttr.ease = ease
+                    ||  this.commonAttr.ease;
+                return this;
+            }
 
-            this.setFriction = function(friction) {
-                b.commonAttr.friction = friction
-                    || b.commonAttr.friction;
-                return b;
-            };
+            setFriction(friction) {
+                this.commonAttr.friction = friction
+                    || this.commonAttr.friction;
+                return this;
+            }
 
-            this.setSize = function(size) {
-                b.commonAttr.size = size
-                    || b.commonAttr.size;
-                return b;
-            };
+            setSize(size) {
+                this.commonAttr.size = size
+                    || this.commonAttr.size;
+                return this;
+            }
+        }
+
+
+        class ParticleObserver {
+
+            constructor(builder) {
+                this.particles = [];
+                this.builder = builder;
+            }
+
+            update(mouse) {
+                for(let p of  this.particles) {
+                    p.update(mouse);
+                }
+            }
+
+            render(context) {
+                let canvas = context.canvas;
+                context.clearRect(0, 0, canvas.width,  canvas.height);
+                for(let p of  this.particles) {
+                    p.draw(context);
+                }
+            }
+
+            reset(index, x, y, color) {
+                if(index < this.particles.length) {
+                    this.particles[index].reset(x, y, color);
+                }
+                else {
+                    let p = this.builder
+                        .setOriginX(x)
+                        .setOriginY(y)
+                        .setColor(color)
+                        .build();
+                    this.particles.push(p);
+                }
+            }
+
+            resize(len) {
+                this.particles.length = len;
+            }
+
         }
 
         return {
-            builder : function() {
-                return new ParticleBuilder();
-            }
-        }
+            builder : () => new ParticleBuilder(),
+            observer : builder => new ParticleObserver(builder)
+        };
     }
 })();
