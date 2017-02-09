@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public class DesempenoService {
 
     private final Logger log = LoggerFactory.getLogger(DesempenoService.class);
-    
+
     @Inject
     private DesempenoRepository desempenoRepository;
 
@@ -47,15 +47,22 @@ public class DesempenoService {
 
     /**
      *  Get all the desempenos.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<DesempenoDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Desempenos");
         Page<Desempeno> result = desempenoRepository.findAll(pageable);
         return result.map(desempeno -> desempenoMapper.desempenoToDesempenoDTO(desempeno));
+    }
+    @Transactional(readOnly = true)
+    public DesempenoDTO findByEntrenamientoIdAndJugadorId(Long entrenamientoId,Long jugadorId) {
+        //        log.debug("Request to get Desenpeno : {}", id);
+                Desempeno desempeno = desempenoRepository.findByEntrenamientoIdAndJugadorId(entrenamientoId,jugadorId);
+                DesempenoDTO desempenoDTO = desempenoMapper.desempenoToDesempenoDTO(desempeno);
+        return desempenoDTO;
     }
 
     /**
@@ -64,7 +71,7 @@ public class DesempenoService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public DesempenoDTO findOne(Long id) {
         log.debug("Request to get Desempeno : {}", id);
         Desempeno desempeno = desempenoRepository.findOne(id);

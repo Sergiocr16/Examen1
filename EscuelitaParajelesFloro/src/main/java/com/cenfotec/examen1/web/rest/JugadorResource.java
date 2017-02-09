@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 public class JugadorResource {
 
     private final Logger log = LoggerFactory.getLogger(JugadorResource.class);
-        
+
     @Inject
     private JugadorService jugadorService;
 
@@ -127,5 +127,12 @@ public class JugadorResource {
         jugadorService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("jugador", id.toString())).build();
     }
-
+    @GetMapping("/jugadors/edad/{id}")
+     @Timed
+     public ResponseEntity<List<JugadorDTO>> getAllJugadorsByCategoria(@PathVariable int id)
+         throws URISyntaxException {
+                log.debug("REST request to get a list of Jugadors by edad");
+                List<JugadorDTO> players = jugadorService.findByEdad(id);
+                return new ResponseEntity<>(players,HttpStatus.OK);
+    }
 }

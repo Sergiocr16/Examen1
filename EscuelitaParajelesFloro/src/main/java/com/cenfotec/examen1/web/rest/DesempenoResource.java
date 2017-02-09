@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 public class DesempenoResource {
 
     private final Logger log = LoggerFactory.getLogger(DesempenoResource.class);
-        
+
     @Inject
     private DesempenoService desempenoService;
 
@@ -127,5 +127,19 @@ public class DesempenoResource {
         desempenoService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("desempeno", id.toString())).build();
     }
+
+    @GetMapping("/desenpenosFindByEntrenamientoIdAndJugadorId/{entrenamientoId}/{jugadorId}")
+     @Timed
+     public ResponseEntity<DesempenoDTO> getDesenpenoByEntrenamientoAndJugador(
+         @PathVariable(value = "entrenamientoId") Long entrenamientoId,
+         @PathVariable(value = "jugadorId")  Long jugadorId) {
+        //        log.debug("REST request to get Desenpeno : {}", id);
+        DesempenoDTO desenpenoDTO = desempenoService.findByEntrenamientoIdAndJugadorId(entrenamientoId,jugadorId);
+                return Optional.ofNullable(desenpenoDTO)
+                    .map(result -> new ResponseEntity<>(
+                            result,
+                            HttpStatus.OK))
+                        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+            }
 
 }

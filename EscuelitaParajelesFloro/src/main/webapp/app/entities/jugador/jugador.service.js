@@ -20,6 +20,11 @@
                     return data;
                 }
             },
+            'getByCategoria' : {
+              method: 'GET',
+              url: 'api/jugadors/edad/:id',
+              isArray: true
+             },
             'update': { method:'PUT' }
         });
     }

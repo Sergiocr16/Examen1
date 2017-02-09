@@ -2,7 +2,7 @@
 <div>
     <h2><span data-translate="escuelitaParajelesFloroApp.entrenamiento.detail.title">Entrenamiento</span> {{vm.entrenamiento.id}}</h2>
     <hr>
-    <jhi-alert-error></jhi-alert-error>
+    <!--<jhi-alert-error></jhi-alert-error>-->
     <dl class="dl-horizontal jh-entity-details">
         <dt><span data-translate="escuelitaParajelesFloroApp.entrenamiento.descripcion">Descripcion</span></dt>
         <dd>
@@ -40,4 +40,45 @@
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
     </button>
+    <h2>Jugadores</h2>
+    <hr>
+    <div ng-show="vm.jugadors.length==0">
+        <h4 style="text-align:center">No existen jugadores en la categoría {{vm.entrenamiento.categoria}}</h4>
+    </div>
+    <div class="table-responsive" ng-show="!vm.jugadors.length==0">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                <th jh-sort-by="nombre"><span >Cédula</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="apellido">Nombre Completo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="posicion"><span>Posicion</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="responsableEmail"><span>Comentario</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="categoriaNombre"><span>Nota</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="jugador in vm.jugadors track by jugador.id">
+                <td><a ui-sref="jugadorang-detail({id:jugador.id})">{{jugador.cedula}}</a></td>
+                <td>{{jugador.nombre}} {{jugador.apellido}}</td>
+                <td>{{jugador.posicion}}</td>
+                <td>
+                    <textarea placeholder="Comenta acerca de {{jugador.nombre}}..." class="form-control" style="margin:0!important;padding:0!important;width:250px" ng-model=" jugador.desempeno.notas"></textarea>
+                </td>
+                <td>
+                    <input type="number" style="text-align:center"class="form-control" ng-model="jugador.desempeno.calificacion"
+                           required min="0" max="10" />
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button ng-click="vm.saveDesempenno(jugador)"
+                                class="btn btn-success btn-sm">
+                            <span class="glyphicon glyphicon-save"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

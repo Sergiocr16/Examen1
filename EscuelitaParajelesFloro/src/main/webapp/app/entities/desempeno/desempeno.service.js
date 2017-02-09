@@ -19,7 +19,14 @@
                     }
                     return data;
                 }
-            },
+            },'fingByEntrenamientoIdAndjugadorId' : {
+               method: 'GET',
+                url: 'api/desenpenosFindByEntrenamientoIdAndJugadorId/:entrenamientoId/:jugadorId',
+                params:{
+                entrenamientoId:'@entrenamientoId',
+                jugadorId: '@jugadorId'
+               }
+             },
             'update': { method:'PUT' }
         });
     }

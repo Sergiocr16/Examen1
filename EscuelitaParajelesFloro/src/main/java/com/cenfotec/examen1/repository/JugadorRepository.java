@@ -4,6 +4,8 @@ import com.cenfotec.examen1.domain.Jugador;
 
 import org.springframework.data.jpa.repository.*;
 
+import java.util.stream.Stream;
+
 import java.util.List;
 
 /**
@@ -13,4 +15,5 @@ import java.util.List;
 public interface JugadorRepository extends JpaRepository<Jugador,Long> {
 
     Integer countByEdad(Integer edad);
+    Stream<Jugador> findByEdad(int id);
 }

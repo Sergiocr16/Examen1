@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Service Implementation for managing Jugador.
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 public class JugadorService {
 
     private final Logger log = LoggerFactory.getLogger(JugadorService.class);
-    
+
     @Inject
     private JugadorRepository jugadorRepository;
 
@@ -47,11 +48,11 @@ public class JugadorService {
 
     /**
      *  Get all the jugadors.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<JugadorDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Jugadors");
         Page<Jugador> result = jugadorRepository.findAll(pageable);
@@ -64,14 +65,19 @@ public class JugadorService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public JugadorDTO findOne(Long id) {
         log.debug("Request to get Jugador : {}", id);
         Jugador jugador = jugadorRepository.findOne(id);
         JugadorDTO jugadorDTO = jugadorMapper.jugadorToJugadorDTO(jugador);
         return jugadorDTO;
     }
-
+    @Transactional(readOnly = true)
+     public List<JugadorDTO> findByEdad(int id) {
+                log.debug("Request to get all Jugadors");
+                Stream<Jugador> result = jugadorRepository.findByEdad(id);
+                return result.map(jugador -> jugadorMapper.jugadorToJugadorDTO(jugador)).collect(Collectors.toList());
+    }
     /**
      *  Delete the  jugador by id.
      *
