@@ -5,30 +5,51 @@
         .module('escuelitaParajelesFloroApp')
         .controller('EntrenamientoAngDialogController', EntrenamientoAngDialogController);
 
-    EntrenamientoAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Entrenamiento', 'Desempeno', 'User'];
+    EntrenamientoAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Entrenamiento', 'Desempeno', 'User', 'Horario'];
 
-    function EntrenamientoAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Entrenamiento, Desempeno, User) {
+    function EntrenamientoAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Entrenamiento, Desempeno, User, Horario) {
         var vm = this;
-
+        var map = {
+            "DOMINGO": 0,
+            "LUNES": 1,
+            "MARTES": 2,
+            "MIERCOLES": 3,
+            "JUEVES": 4,
+            "VIERNES": 5,
+            "SABADO": 6,
+        };
         vm.entrenamiento = entity;
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
         vm.desempenos = Desempeno.query();
-        User.byRole({role: 'ROLE_COUCH'}, function(result) {
-            vm.users = result;
-        });
-        $timeout(function (){
-            angular.element('.form-group:eq(1)>input').focus();
-        });
+        vm.horarios = Horario.query();
+        vm.dateOptions = { dateDisabled: disabled };
+
+        User.byRole({role: 'ROLE_COUCH'}, result => vm.users = result);
+        $timeout(() => angular.element('.form-group:eq(1)>input').focus());
+
+        function disabled(data) {
+            let {date, mode} = data;
+            let dia = vm.horario ? map[vm.horario.dia] : -1;
+            return mode === 'day' && (date.getDay() !== dia);
+        }
 
         function clear () {
             $uibModalInstance.dismiss('cancel');
         }
 
+
+        function setHorario() {
+            vm.entrenamiento.categoria = vm.horario.categoria;
+            vm.entrenamiento.horaFin = vm.horario.horaFin;
+            vm.entrenamiento.horaInicio = vm.horario.horaInicio;
+        }
+
         function save () {
             vm.isSaving = true;
+            setHorario();
             if (vm.entrenamiento.id !== null) {
                 Entrenamiento.update(vm.entrenamiento, onSaveSuccess, onSaveError);
             } else {

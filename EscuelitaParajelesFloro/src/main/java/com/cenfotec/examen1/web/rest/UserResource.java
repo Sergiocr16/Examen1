@@ -220,9 +220,8 @@ public class UserResource {
     @Timed
     public ResponseEntity<List<UserDTO>> getUserByRol(@PathVariable String role)
         throws URISyntaxException {
-        List<UserDTO> listUsers  = userService.getUserByRole(role)
-            .stream()
-            .map(UserDTO::new)
+        List<UserDTO> listUsers  = userRepository.findAllByRole(role)
+            .map(ManagedUserVM::new)
             .collect(Collectors.toList());
         return new ResponseEntity<>(listUsers, HttpStatus.OK);
     }
