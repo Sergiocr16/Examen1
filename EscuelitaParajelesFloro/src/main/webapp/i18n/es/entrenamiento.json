@@ -14,7 +14,8 @@
                 "question": "¿Seguro que quiere eliminar Entrenamiento {{ id }}?"
             },
             "detail": {
-                "title": "Entrenamiento"
+                "title": "Entrenamiento",
+                "horario": "{{('escuelitaParajelesFloroApp.Dia.' + dia) | translate}} de {{horaInicio | minToTime}} a {{horaFin | minToTime}} con la categoria U-{{categoria}}"
             },
             "descripcion": "Descripcion",
             "fecha": "Fecha",

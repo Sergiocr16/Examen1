@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 
 /**
@@ -32,5 +33,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Page<User> findAllWithAuthorities(Pageable pageable);
 
     @Query(value = "select user from User user join user.authorities auth where auth.name = ?1")
-    List<User> findAllByRole(String role);
+    Stream<User> findAllByRole(String role);
 }

@@ -33,8 +33,8 @@
                     <td><a ui-sref="entrenamientoang-detail({id:entrenamiento.id})">{{entrenamiento.id}}</a></td>
                     <td>{{entrenamiento.descripcion}}</td>
                         <td>{{entrenamiento.fecha | date:'mediumDate'}}</td>
-                    <td>{{entrenamiento.horaInicio}}</td>
-                    <td>{{entrenamiento.horaFin}}</td>
+                    <td>{{entrenamiento.horaInicio | minToTime}}</td>
+                    <td>{{entrenamiento.horaFin | minToTime}}</td>
                     <td>{{entrenamiento.categoria}}</td>
                     <td>
                         {{entrenamiento.entrenadorLogin}}
