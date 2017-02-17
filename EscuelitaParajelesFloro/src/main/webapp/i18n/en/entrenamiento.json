@@ -2,28 +2,28 @@
     "escuelitaParajelesFloroApp": {
         "entrenamiento" : {
             "home": {
-                "title": "Entrenamientos",
-                "createLabel": "Create a new Entrenamiento",
-                "createOrEditLabel": "Create or edit a Entrenamiento",
-                "search": "Search for Entrenamiento"
+                "title": "Trainings",
+                "createLabel": "Create a new training",
+                "createOrEditLabel": "Create or edit a training",
+                "search": "Search for training"
             },
-            "created": "A new Entrenamiento is created with identifier {{ param }}",
-            "updated": "A Entrenamiento is updated with identifier {{ param }}",
-            "deleted": "A Entrenamiento is deleted with identifier {{ param }}",
+            "created": "A new training is created with identifier {{ param }}",
+            "updated": "A training is updated with identifier {{ param }}",
+            "deleted": "A training is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Entrenamiento {{ id }}?"
+                "question": "Are you sure you want to delete training {{ id }}?"
             },
             "detail": {
-                "title": "Entrenamiento",
+                "title": "Training",
                 "horario": "{{('escuelitaParajelesFloroApp.Dia.' + dia) | translate}} from {{horaInicio | minToTime}} to {{horaFin | minToTime}} with the category U-{{categoria}}"
             },
-            "descripcion": "Descripcion",
-            "fecha": "Fecha",
-            "horaInicio": "Hora Inicio",
-            "horaFin": "Hora Fin",
-            "categoria": "Categoria",
-            "desenpeno": "Desenpeno",
-            "entrenador": "Entrenador"
+            "descripcion": "Description",
+            "fecha": "Date",
+            "horaInicio": "Initial time",
+            "horaFin": "Final time",
+            "categoria": "Category",
+            "desenpeno": "Performance",
+            "entrenador": "Couch"
         }
     }
 }

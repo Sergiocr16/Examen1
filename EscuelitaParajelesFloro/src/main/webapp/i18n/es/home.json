@@ -1,15 +1,10 @@
 {
     "home": {
-        "title": "¡Bienvenido, Java Hipster!",
+        "title": "¡Bienvenido a la escuela de Parajeles y Floro! ⚔",
         "subtitle": "Esta es su página de inicio",
         "logged": {
             "message": "Está conectado como \"{{username}}\"."
         },
-        "saludo": {
-            "saludoNombre" :"Hola{{firstName ? ' ' + firstName : ''}},",
-            "diaEntrenamiento" : "su proximo entrenamiento es el",
-            "rangoTiempo" : "de {{horaInicio}} a {{horaFin}}",
-            "cantidadJugadores" : "con {{cantidad}} jugadores."
-        }
+        "saludo": "Hola{{firstName ? ' ' + firstName : ''}}, su proximo entrenamiento es el {{dia | translate}} de {{horaInicio}} a {{horaFin}} con {{cantidad}} jugador{{cantidad === 1 ? '': 'es'}}."
     }
 }

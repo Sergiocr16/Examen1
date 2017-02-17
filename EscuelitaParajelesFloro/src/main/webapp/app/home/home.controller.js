@@ -41,18 +41,13 @@
             Promise.all([Horario.mostRecent().$promise, getAccount()])
                    .then(([r, u]) => {
                        vm.saludo = {
-                           saludoNombre: {
-                               firstName: u.firstName
-                           },
-                           rangoTiempo: {
-                               horaInicio: minToTimeFilter(r.horario.horaInicio),
-                               horaFin: minToTimeFilter(r.horario.horaFin),
-                           },
-                           cantidadJugadores: {
-                               cantidad: r.cantidadJugadores
-                           },
-                           dia: r.horario.dia,
-                       };});
+                           firstName: u.firstName,
+                           horaInicio: minToTimeFilter(r.horario.horaInicio),
+                           horaFin: minToTimeFilter(r.horario.horaFin),
+                           cantidad: r.cantidadJugadores,
+                           dia: 'escuelitaParajelesFloroApp.Dia.' + r.horario.dia
+                       };
+            });
         }
     }
 })();

@@ -42,11 +42,7 @@
                     .forEachAlphaPixel(context, this.spacing);
                 let i = 0;
                 for (let [x, y, {R, G, B, A}] of gen) {
-                    let color = 'rgba('
-                        + R + ','
-                        + G + ','
-                        + B + ','
-                        + A + ')';
+                    let color = `rgba(${R},${G},${B},${A})`;
                     this.observer.reset(i++, x, y, color);
                 }
                 this.observer.resize(i);

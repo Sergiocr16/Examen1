@@ -2,26 +2,26 @@
     "escuelitaParajelesFloroApp": {
         "jugador" : {
             "home": {
-                "title": "Jugadors",
-                "createLabel": "Create a new Jugador",
-                "createOrEditLabel": "Create or edit a Jugador",
-                "search": "Search for Jugador"
+                "title": "Players",
+                "createLabel": "Create a new player",
+                "createOrEditLabel": "Create or edit a player",
+                "search": "Search for player"
             },
-            "created": "A new Jugador is created with identifier {{ param }}",
-            "updated": "A Jugador is updated with identifier {{ param }}",
-            "deleted": "A Jugador is deleted with identifier {{ param }}",
+            "created": "A new player is created with identifier {{ param }}",
+            "updated": "A player is updated with identifier {{ param }}",
+            "deleted": "A player is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Jugador {{ id }}?"
+                "question": "Are you sure you want to delete player {{ id }}?"
             },
             "detail": {
-                "title": "Jugador"
+                "title": "Player"
             },
-            "nombre": "Nombre",
-            "apellido": "Apellido",
-            "edad": "Edad",
-            "cedula": "Cedula",
-            "posicion": "Posicion",
-            "responsable": "Responsable"
+            "nombre": "Name",
+            "apellido": "Last name",
+            "edad": "Age",
+            "cedula": "Identification",
+            "posicion": "Position",
+            "responsable": "Responsible"
         }
     }
 }

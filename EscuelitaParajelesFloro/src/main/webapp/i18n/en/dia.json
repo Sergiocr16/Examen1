@@ -2,8 +2,8 @@
     "escuelitaParajelesFloroApp": {
         "Dia" : {
             "null": "",
-            "LUNES": "Monday",
-            "MARTES": "Tuesday",
+            "LUNES": "monday",
+            "MARTES": "tuesday",
             "MIERCOLES": "wednesday",
             "JUEVES": "thursday",
             "VIERNES": "friday",

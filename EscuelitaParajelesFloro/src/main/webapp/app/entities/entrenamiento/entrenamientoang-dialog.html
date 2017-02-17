@@ -53,7 +53,7 @@
             <label data-translate="global.menu.entities.horarioang" for="horario_template">Horario</label>
             <select required class="form-control" id="horario_template" name="horario" ng-model="vm.horario"
                     ng-options="horario as 'escuelitaParajelesFloroApp.entrenamiento.detail.horario' | translate : horario  for horario in vm.horarios"
-                    ng-change="vm.onChange()">
+                    ng-change="vm.onHorarioChange()">
                 <option value=""></option>
             </select>
         </div>

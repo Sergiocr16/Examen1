@@ -1,17 +1,11 @@
 {
     "home": {
-        "title": "Welcome, Java Hipster!",
+        "title": "Welcome to Parajeles and Floro school! ⚔",
         "subtitle": "This is your homepage",
         "logged": {
             "message": "You are logged in as user \"{{username}}\"."
         },
-
-        "saludo": {
-            "saludoNombre" :"Hello{{firstName ? ' ' + firstName : ''}},",
-            "diaEntrenamiento" : "your next tranning is on",
-            "rangoTiempo" : "from {{horaInicio}} to {{horaFin}}",
-            "cantidadJugadores" : "with {{cantidad}} players."
-        }
+        "saludo": "Hello{{firstName ? ' ' + firstName : ''}}, your next tranning is on {{dia | translate}} from {{horaInicio}} to {{horaFin}} with {{cantidad}} player{{ cantidad === 1 ? '': 's'}}."
 
     }
 }

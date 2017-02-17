@@ -8,14 +8,18 @@
 (function () {
     'use strict';
     angular.module('escuelitaParajelesFloroApp')
-        .filter('minToTime', function() {
-            return function (m) {
-                function addZero(m) {
-                    return (m < 10 ? "0" : "").concat(m);
-                }
-                return addZero(Math.floor(m / 60))
-                    + ":"
-                    + addZero(m % 60);
-            };
-        });
+        .filter('minToTime', MinToTime);
+
+    function MinToTime() {
+        return MinToTimeFilter;
+
+        function MinToTimeFilter(m) {
+            return addZero(Math.floor(m / 60))
+                + ":"
+                + addZero(m % 60);
+            function addZero(m) {
+                return (m < 10 ? "0" : "").concat(m);
+            }
+        }
+    }
 })();

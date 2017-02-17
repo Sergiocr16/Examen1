@@ -9,7 +9,7 @@
 
     function EntrenamientoAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Entrenamiento, Desempeno, User, Horario) {
         var vm = this;
-        var map = {
+        let map = {
             "DOMINGO": 0,
             "LUNES": 1,
             "MARTES": 2,
@@ -18,14 +18,16 @@
             "VIERNES": 5,
             "SABADO": 6,
         };
-        vm.entrenamiento = entity;
-        vm.clear = clear;
         vm.datePickerOpenStatus = {};
-        vm.openCalendar = openCalendar;
-        vm.save = save;
-        vm.desempenos = Desempeno.query();
-        vm.horarios = Horario.query();
-        vm.dateOptions = { dateDisabled: disabled };
+
+        vm.entrenamiento   = entity;
+        vm.clear           = clear;
+        vm.openCalendar    = openCalendar;
+        vm.save            = save;
+        vm.onHorarioChange = onHorarioChange;
+        vm.desempenos      = Desempeno.query();
+        vm.horarios        = Horario.query();
+        vm.dateOptions     = { dateDisabled: disabled };
 
         User.byRole({role: 'ROLE_COUCH'}, result => vm.users = result);
         $timeout(() => angular.element('.form-group:eq(1)>input').focus());
@@ -40,6 +42,9 @@
             $uibModalInstance.dismiss('cancel');
         }
 
+        function onHorarioChange() {
+            vm.entrenamiento.fecha = '';
+        }
 
         function setHorario() {
             vm.entrenamiento.categoria = vm.horario.categoria;

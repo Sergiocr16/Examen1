@@ -1,4 +1,4 @@
-package com.cenfotec.examen1.service.dto.customDTO;
+package com.cenfotec.examen1.service.dto;
 
 import java.io.Serializable;
 import com.cenfotec.examen1.service.dto.HorarioDTO;

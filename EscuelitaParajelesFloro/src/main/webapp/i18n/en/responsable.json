@@ -2,24 +2,24 @@
     "escuelitaParajelesFloroApp": {
         "responsable" : {
             "home": {
-                "title": "Responsables",
-                "createLabel": "Create a new Responsable",
-                "createOrEditLabel": "Create or edit a Responsable",
-                "search": "Search for Responsable"
+                "title": "Responsibles",
+                "createLabel": "Create a new responsible",
+                "createOrEditLabel": "Create or edit a responsible",
+                "search": "Search for responsible"
             },
-            "created": "A new Responsable is created with identifier {{ param }}",
-            "updated": "A Responsable is updated with identifier {{ param }}",
-            "deleted": "A Responsable is deleted with identifier {{ param }}",
+            "created": "A new responsible is created with identifier {{ param }}",
+            "updated": "A responsible is updated with identifier {{ param }}",
+            "deleted": "A responsible is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Responsable {{ id }}?"
+                "question": "Are you sure you want to delete responsible {{ id }}?"
             },
             "detail": {
-                "title": "Responsable"
+                "title": "Responsible"
             },
-            "nombre": "Nombre",
-            "apellido": "Apellido",
+            "nombre": "Name",
+            "apellido": "Last name",
             "email": "Email",
-            "telefono": "Telefono"
+            "telefono": "Phone number"
         }
     }
 }

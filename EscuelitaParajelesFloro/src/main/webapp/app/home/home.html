@@ -12,11 +12,7 @@
                     You are logged in as user "{{vm.account.login}}".
                 </div>
                 <div ng-if="vm.showHorarioMasCercano();" class="alert alert-success" ng-switch-when="true" has-authority="ROLE_COUCH">
-                    <span data-translate="home.saludo.saludoNombre" translate-values="vm.saludo.saludoNombre"></span>
-                    <span data-translate="home.saludo.diaEntrenamiento"></span>
-                    <span data-translate="escuelitaParajelesFloroApp.Dia.{{vm.saludo.dia}}"></span>
-                    <span data-translate="home.saludo.rangoTiempo" translate-values="vm.saludo.rangoTiempo"></span>
-                    <span data-translate="home.saludo.cantidadJugadores" translate-values="vm.saludo.cantidadJugadores"></span>
+                    <span data-translate="home.saludo" translate-values="vm.saludo"></span>
                 </div>
                 <div class="alert alert-warning" ng-switch-when="false" data-translate="global.messages.info.register" translate-compile>
                     You don't have an account yet? <a class="alert-link" ui-sref="register">Register a new account</a>

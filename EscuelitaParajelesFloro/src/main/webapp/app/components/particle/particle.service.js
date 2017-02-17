@@ -53,7 +53,7 @@
 
                 this.color = this.inOrigin()
                     ? this.originalColor
-                    : this.motionColor;
+                    : this.atributes.motionColor;
 
                 this.color = this.color
                     || this.originalColor;

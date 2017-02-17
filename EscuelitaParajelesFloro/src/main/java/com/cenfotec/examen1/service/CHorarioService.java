@@ -1,12 +1,11 @@
-package com.cenfotec.examen1.service.customService;
+package com.cenfotec.examen1.service;
 
 import com.cenfotec.examen1.domain.Horario;
 import com.cenfotec.examen1.domain.enumeration.Dia;
 import com.cenfotec.examen1.repository.HorarioRepository;
 import com.cenfotec.examen1.repository.JugadorRepository;
-import com.cenfotec.examen1.service.HorarioService;
 import com.cenfotec.examen1.service.dto.HorarioDTO;
-import com.cenfotec.examen1.service.dto.customDTO.CHorarioDTO;
+import com.cenfotec.examen1.service.dto.CHorarioDTO;
 import com.cenfotec.examen1.service.mapper.HorarioMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;

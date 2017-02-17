@@ -1,5 +1,7 @@
 package com.cenfotec.examen1.web.rest;
 
+import com.cenfotec.examen1.service.CHorarioService;
+import com.cenfotec.examen1.service.dto.CHorarioDTO;
 import com.codahale.metrics.annotation.Timed;
 import com.cenfotec.examen1.service.HorarioService;
 import com.cenfotec.examen1.web.rest.util.HeaderUtil;
@@ -36,6 +38,8 @@ public class HorarioResource {
 
     @Inject
     private HorarioService horarioService;
+    @Inject
+    private CHorarioService chorarioService;
 
     /**
      * POST  /horarios : Create a new horario.
@@ -156,4 +160,11 @@ public class HorarioResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("horario", id.toString())).build();
     }
 
+    @GetMapping("/horarioMasCercano")
+    @Timed
+    public ResponseEntity<CHorarioDTO> getHorarioMasCercano() {
+        return chorarioService.horarioMasCercanoYJugadores()
+            .map(result -> new ResponseEntity<>(result, HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 }

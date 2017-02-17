@@ -2,24 +2,24 @@
     "escuelitaParajelesFloroApp": {
         "desempeno" : {
             "home": {
-                "title": "Desempenos",
-                "createLabel": "Create a new Desempeno",
-                "createOrEditLabel": "Create or edit a Desempeno",
-                "search": "Search for Desempeno"
+                "title": "Performance",
+                "createLabel": "Create a new performance",
+                "createOrEditLabel": "Create or edit a performance",
+                "search": "Search for performance"
             },
-            "created": "A new Desempeno is created with identifier {{ param }}",
-            "updated": "A Desempeno is updated with identifier {{ param }}",
-            "deleted": "A Desempeno is deleted with identifier {{ param }}",
+            "created": "A new performance is created with identifier {{ param }}",
+            "updated": "A performance is updated with identifier {{ param }}",
+            "deleted": "A performance is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Desempeno {{ id }}?"
+                "question": "Are you sure you want to delete performance {{ id }}?"
             },
             "detail": {
-                "title": "Desempeno"
+                "title": "Performance"
             },
-            "calificacion": "Calificacion",
-            "notas": "Notas",
-            "jugador": "Jugador",
-            "entrenamiento": "Entrenamiento"
+            "calificacion": "Qualification",
+            "notas": "Notes",
+            "jugador": "Player",
+            "entrenamiento": "Training"
         }
     }
 }
