@@ -28,11 +28,9 @@ function ParticleImage($window, $document, Particle, ImageUtil, ParticleImageAni
 
             if (!angular.isArray(scope.src)
                 && scope.src.length !== 0) {
-                console.log("Fuyck");
                 return;
 
             }
-            console.log(attrs.motionColor);
             let builder = Particle.builder()
                 .setFriction(parseFloat(attrs.friction))
                 .setEase(parseFloat(attrs.ease))
