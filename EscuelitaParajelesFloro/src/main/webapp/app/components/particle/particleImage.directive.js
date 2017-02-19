@@ -28,7 +28,9 @@ function ParticleImage($window, $document, Particle, ImageUtil, ParticleImageAni
 
             if (!angular.isArray(scope.src)
                 && scope.src.length !== 0) {
+                console.log("Fuyck");
                 return;
+
             }
             console.log(attrs.motionColor);
             let builder = Particle.builder()
@@ -68,12 +70,13 @@ function ParticleImage($window, $document, Particle, ImageUtil, ParticleImageAni
             function slideShow(images) {
                 if(images.length  === 1) {
                     pia.setImage(images[0]);
-                    return;
                 }
-                (function p(i) {
-                    pia.setImage(images[i]);
-                    $timeout(()=> p((i + 1) % images.length), timeout);
-                })(0);
+                else {
+                    (function p(i) {
+                        pia.setImage(images[i]);
+                        $timeout(()=> p((i + 1) % images.length), timeout);
+                    })(0);
+                }
                 pia.start(mouse);
             }
 
