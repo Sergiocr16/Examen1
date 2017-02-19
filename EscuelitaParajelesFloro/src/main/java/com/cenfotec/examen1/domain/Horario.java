@@ -1,5 +1,6 @@
 package com.cenfotec.examen1.domain;
 
+import com.cenfotec.examen1.constrains.HorarioTimeConstrain;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -19,6 +20,7 @@ import com.cenfotec.examen1.domain.enumeration.Dia;
 @ApiModel(description = "Hay que preguntar si cada horario deberia tener un entrenador asignado. Asi solo se mostraria el horario mas cercano asignado a este, cuando inicie session")
 @Entity
 @Table(name = "horario")
+@HorarioTimeConstrain(message = "HoraInicio debe ser menor a horaFin")
 public class Horario implements Serializable {
 
     private static final long serialVersionUID = 1L;

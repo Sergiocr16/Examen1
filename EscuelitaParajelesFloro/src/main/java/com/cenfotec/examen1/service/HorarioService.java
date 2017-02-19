@@ -10,8 +10,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +25,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
+@Validated
 public class HorarioService {
 
     private final Logger log = LoggerFactory.getLogger(HorarioService.class);
@@ -38,7 +42,7 @@ public class HorarioService {
      * @param horarioDTO the entity to save
      * @return the persisted entity
      */
-    public HorarioDTO save(HorarioDTO horarioDTO) {
+    public HorarioDTO save(@Valid HorarioDTO horarioDTO) {
         log.debug("Request to save Horario : {}", horarioDTO);
         Horario horario = horarioMapper.horarioDTOToHorario(horarioDTO);
         horario = horarioRepository.save(horario);
